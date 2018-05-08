@@ -1,0 +1,12 @@
+RewriteEngine On
+
+#RewriteRule ^css/(.*)$ assets/css/$1
+#RewriteRule ^js/(.*)$ assets/js/$1
+#RewriteRule ^img/(.*)$ assets/img/$1
+#RewriteRule ^imagens/(.*)$ assets/midias/imagens/$1
+#RewriteRule ^audios/(.*)$ assets/midias/audios/$1
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

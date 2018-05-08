@@ -1,0 +1,14 @@
+main .form-group > table{
+    width: 900px;
+    background-color: #f2f2f2;
+}
+
+main .form-group > table > thead{
+    background-color: #3c8dbc;
+    color: #fff;
+}
+
+main .form-group table > thead > th {
+    border-top: none;
+    color: #fff;
+}

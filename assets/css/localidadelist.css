@@ -1,0 +1,103 @@
+main .topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+main .form-group label {
+    margin: 0 10px;
+}
+
+main .topo select {
+    width: 300px;
+}
+
+main .topo input {
+    width: 300px;
+    float: right;
+    margin-left: 40px;
+}
+
+main .topo button {
+    float: right;
+    margin-left: 10px;
+}
+
+main .form-group table {
+    width: 550px;
+    margin: 10px 0 100px 0;
+    border-bottom: 2px solid #dee2e6;
+}
+
+main .form-group .opcoes {
+    width: 550px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+main .form-group .salvar {
+    width: 550px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+main .form-group .opcoes input {
+    width: 300px;
+    margin: 0 10px;
+}
+
+main .form-group table thead th:nth-child(2),
+main .form-group table thead th:nth-child(3) {
+    width: 40px;
+}
+
+main .form-group table thead{
+    background-color: #3c8dbc;
+}
+
+main .form-group table thead th {
+    border-top: none;
+    color: #fff;
+}
+
+main .form-group table tbody tr td{
+    border: none;
+    background: transparent;
+}
+
+main .form-group table tbody tr td input{
+    /*background-color: #f2f2f2;*/
+}
+
+main .form-group table tbody tr td:first-child {
+    cursor: pointer;
+}
+
+main .form-group table tbody tr td:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+main .form-group table tbody tr td:nth-child(3) {
+    position: relative;
+    cursor: pointer;
+    height: 60px;
+}
+
+main .form-group table tbody tr td:nth-child(3) i {
+    position: absolute;
+    left: 13px;
+    top: 22px;
+}
+
+main .form-group table tbody tr td:nth-child(3):hover i {
+    color: red;
+}
+
+main {
+    position: relative;
+}
