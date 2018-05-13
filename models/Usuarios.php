@@ -56,14 +56,24 @@ class Usuarios extends Model {
 
         } else {
 
-            $valores = "nome = '{$dados['nome']}', login ='{$dados['login']}', senha ='{$dados['senha']}', tipo_id ='{$dados['tipo_id']}', ativo='{$dados['ativo']}'";
+            $condicao = " WHERE login = '" . $dados['login'] . "' and id != {$dados['id']}";
+            $verifica = $c->Selecionar('*', 'usuario', $condicao);
 
-            $id = $c->Update('usuario', $valores, " WHERE id = {$dados['id']}");
+            if (count($verifica) > 0) {
 
-            if ($id > 0) {
-                $res['msg'] = 'Salvo!';
+                $res['msg'] = 'Não foi possível salvar. Este login já pertence a outro registro!';
+
             } else {
-                $res['msg'] = 'Altere o registro para salvar!';
+
+                $valores = "nome = '{$dados['nome']}', login ='{$dados['login']}', senha ='{$dados['senha']}', tipo_id ='{$dados['tipo_id']}', ativo='{$dados['ativo']}'";
+
+                $id = $c->Update('usuario', $valores, " WHERE id = {$dados['id']}");
+
+                if ($id > 0) {
+                    $res['msg'] = 'Salvo!';
+                } else {
+                    $res['msg'] = 'Altere o registro para salvar!';
+                }
             }
 
         }
@@ -87,7 +97,7 @@ class Usuarios extends Model {
                     $res[$i]['ativo'] = "Não";
                 }
 
-                $res[$i]['tipo'] = $c->Selecionar("nome", "tipo_usuario", " WHERE id=".$v['tipo_id'])[0]['nome'];
+                $res[$i]['tipo'] = $c->Selecionar("nome", "tipo_usuario", " WHERE id=" . $v['tipo_id'])[0]['nome'];
             }
         }
 

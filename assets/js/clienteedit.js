@@ -57,18 +57,11 @@ $(function () {
                         acao: 'editarcliente',
                         dados: dados
                     },
-                    dataType: 'text',
+                    dataType: 'json',
                     success: function (retorno) {
                         console.log(retorno);
-                        if (retorno == 0) {
-                            alert('Nenhuma alteração foi feita!');
-                            window.location.reload();
-                        }
-
-                        if (retorno > 0) {
-                            alert('Salvo!');
-                            window.location.reload();
-                        }
+                        alert(retorno.msg);
+                        window.location.reload();
                     }
                 });
             }

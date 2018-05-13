@@ -27,7 +27,7 @@
                         </span>
                         <span>
                             <a href="<?= BASE_URL ?>usuarioedit">
-                                <button class="btn btn-success"><i class="fa fa fa-wrench"></i> Novo </button>
+                                <button class="btn btn-success"><i class="fa fa fa-user-o"></i> Novo </button>
                             </a>
                         </span>
                     </div>

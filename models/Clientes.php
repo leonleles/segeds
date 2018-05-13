@@ -29,17 +29,28 @@ class Clientes extends Model {
 
         $c = new CRUD();
 
+        $condicao = " WHERE cpf = '" . $dados['cpf_cnpj'] . "' and id != {$dados['id']}";
+        $verifica = $c->Selecionar('*', 'cliente', $condicao);
 
-        //salvar endereco
-        $valores = "rua ='{$dados['rua']}', bairro ='{$dados['bairro']}', numero ='{$dados['numero']}', distrito_id='{$dados['distrito']}', complemento='{$dados['complemento']}', municipio_id='{$dados['municipio']}'";
+        if (count($verifica) > 0) {
+            $res['msg'] = "Não salvo! CPF/CNPJ em uso em outro registro.";
+        } else {
 
-        $resend = $c->Update('endereco', $valores, ' WHERE id=' . $dados['id_endereco']);
 
-        //salva cliente
-        $valoress = "nome='{$dados['nome']}', telefone='{$dados['telefone']}', cpf='{$dados['cpf_cnpj']}', data_nascimento='{$dados['nasc']}', rg='{$dados['rg']}', orgaoex='{$dados['orgaoex']}', ativo='{$dados['ativo']}'";
-        $res = $c->Update('cliente', $valoress, ' WHERE id=' . $dados['id']);
+            //salvar endereco
+            $valores = "rua ='{$dados['rua']}', bairro ='{$dados['bairro']}', numero ='{$dados['numero']}', distrito_id='{$dados['distrito']}', complemento='{$dados['complemento']}', municipio_id='{$dados['municipio']}'";
 
-        return $res+$resend;
+            $c->Update('endereco', $valores, ' WHERE id=' . $dados['id_endereco']);
+
+            //salva cliente
+            $valoress = "nome='{$dados['nome']}', telefone='{$dados['telefone']}', cpf='{$dados['cpf_cnpj']}', data_nascimento='{$dados['nasc']}', rg='{$dados['rg']}', orgaoex='{$dados['orgaoex']}', ativo='{$dados['ativo']}'";
+            $c->Update('cliente', $valoress, ' WHERE id=' . $dados['id']);
+
+            $res['msg'] = "Salvo!";
+
+        }
+
+        return $res;
     }
 
     public function selecionarId ($id) {
