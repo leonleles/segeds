@@ -3,7 +3,7 @@
     <li class="breadcrumb-item">
         <a href="<?= BASE_URL ?>home"">Início</a>
     </li>
-    <li class="breadcrumb-item active">Gerenciar Clientes</li>
+    <li class="breadcrumb-item active">Usuários</li>
 </ol>
 
 <div class="form-group">
@@ -11,7 +11,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Clientes</th>
+            <th>Usuários</th>
         </tr>
         </thead>
 
@@ -26,8 +26,8 @@
                                class="form-control">
                         </span>
                         <span>
-                            <a href="<?= BASE_URL ?>clientenew?s=clientelist">
-                                <button class="btn btn-success"><i class="fa fa-user-plus"></i> Novo </button>
+                            <a href="<?= BASE_URL ?>usuarioedit">
+                                <button class="btn btn-success"><i class="fa fa fa-wrench"></i> Novo </button>
                             </a>
                         </span>
                     </div>
@@ -38,23 +38,24 @@
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Telefone</th>
-                                    <th>CPF</th>
-                                    <th></th>
+                                    <th>Login</th>
+                                    <th>Tipo</th>
+                                    <th>Ativo</th>
+                                    <th style="width:50px;"></th>
                                 </tr>
 
                                 </thead>
                                 <tbody>
-
-                                <?php if (count($clientes) > 0) {
-                                    foreach ($clientes as $v) {
+                                <?php if (count($usuarios) > 0) {
+                                    foreach ($usuarios as $v) {
                                         ?>
                                         <tr>
                                             <td><?= $v['nome'] ?></td>
-                                            <td><?= $v['telefone'] ?></td>
-                                            <td><?= $v['cpf'] ?></td>
-                                            <td>
-                                                <a href="<?= BASE_URL ?>clienteedit?id=<?= $v['id'] ?>">
+                                            <td><?= $v['login'] ?></td>
+                                            <td><?= $v['tipo'] ?></td>
+                                            <td><?= $v['ativo'] ?></td>
+                                            <td style="display: flex; justify-content: center;">
+                                                <a href="<?= BASE_URL ?>usuarioedit?id=<?= $v['id'] ?>">
                                                     <button class="btn btn-primary"><i class="fa fa-edit"></i> Ver
                                                     </button>
                                                 </a>

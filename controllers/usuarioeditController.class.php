@@ -6,15 +6,20 @@ class usuarioeditController extends Controller {
         $dados = array();
         $c = new CRUD();
 
-        $id = $_GET['id'];
+        $id = (!empty($_GET['id'])) ? $_GET['id'] : null;
 
         if($id != null){
-            $dados['servico'] = $c->Selecionar('*', 'servico', ' WHERE id =' . $id)[0];
+            $dados['usuario'] = $c->Selecionar('*', 'usuario', ' WHERE id =' . $id)[0];
         }else{
-            $dados['servico']['id'] = null;
-            $dados['servico']['nome'] = null;
-            $dados['servico']['ativo'] = null;
+            $dados['usuario']['id'] = null;
+            $dados['usuario']['nome'] = null;
+            $dados['usuario']['login'] = null;
+            $dados['usuario']['senha'] = null;
+            $dados['usuario']['ativo'] = null;
+            $dados['usuario']['tipo_id'] = null;
         }
+
+        $dados['tipos'] = $c->Selecionar('*', 'tipo_usuario');
 
         $this->setCss('assets/css/usuarioedit.css');
         $this->setJs('assets/js/usuarioedit.js');

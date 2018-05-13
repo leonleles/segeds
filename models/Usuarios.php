@@ -1,9 +1,7 @@
 <?php
 
-class Usuarios extends Model
-{
-    public function login($user, $pass)
-    {
+class Usuarios extends Model {
+    public function login ($user, $pass) {
 
         $return = array();
 
@@ -35,44 +33,39 @@ class Usuarios extends Model
 
         $res = [];
 
-        $condicao = " WHERE nome = '" . $dados['nome'] . "'";
-        $verifica = $c->Selecionar('*', 'servico', $condicao);
+        if ($dados['id'] == null || $dados['id'] == "") {
 
-        if (count($verifica) > 0) {
+            $condicao = " WHERE login = '" . $dados['login'] . "'";
+            $verifica = $c->Selecionar('*', 'usuario', $condicao);
 
-            $res['msg'] = 'Registro com nome existe!';
+            if (count($verifica) > 0) {
+
+                $res['msg'] = 'Registro com login existe!';
+
+            } else {
+
+                $dados = "'{$dados['nome']}', '{$dados['login']}', '{$dados['senha']}', '{$dados['tipo_id']}', '{$dados['ativo']}'";
+
+                $id = $c->Salvar('usuario', 'nome, login, senha, tipo_id, ativo', $dados);
+
+                if ($id > 0) {
+                    $res['id'] = $id;
+                    $res['msg'] = 'Salvo!';
+                }
+            }
 
         } else {
 
-            $dados = "'{$dados['nome']}', '{$dados['ativo']}'";
+            $valores = "nome = '{$dados['nome']}', login ='{$dados['login']}', senha ='{$dados['senha']}', tipo_id ='{$dados['tipo_id']}', ativo='{$dados['ativo']}'";
 
-            $id = $c->Salvar('servico', 'nome, ativo', $dados);
+            $id = $c->Update('usuario', $valores, " WHERE id = {$dados['id']}");
 
             if ($id > 0) {
-                $res['id'] = $id;
                 $res['msg'] = 'Salvo!';
+            } else {
+                $res['msg'] = 'Altere o registro para salvar!';
             }
-        }
 
-        return $res;
-
-
-    }
-
-    public function editar ($dados) {
-
-        $c = new CRUD();
-
-        $res = [];
-
-        $valores = "ativo = '{$dados['ativo']}', nome = '{$dados['nome']}'";
-
-        $id = $c->Update('servico', $valores, " WHERE id = {$dados['id']}");
-
-        if ($id > 0) {
-            $res['msg'] = 'Salvo!';
-        } else {
-            $res['msg'] = 'Altere o registro para salvar!';
         }
 
         return $res;
@@ -84,15 +77,17 @@ class Usuarios extends Model
 
         $c = new CRUD();
 
-        $res = $c->Selecionar('*', 'servico', ' order by nome');
+        $res = $c->Selecionar('*', 'usuario', ' order by nome');
 
         if (count($res) > 0) {
             foreach ($res as $i => $v) {
                 if ($res[$i]['ativo'] == 1) {
                     $res[$i]['ativo'] = "Sim";
-                }else{
+                } else {
                     $res[$i]['ativo'] = "Não";
                 }
+
+                $res[$i]['tipo'] = $c->Selecionar("nome", "tipo_usuario", " WHERE id=".$v['tipo_id'])[0]['nome'];
             }
         }
 

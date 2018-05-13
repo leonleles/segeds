@@ -6,7 +6,7 @@ class servicoeditController extends Controller {
         $dados = array();
         $c = new CRUD();
 
-        $id = $_GET['id'];
+        $id = (!empty($_GET['id'])) ? $_GET['id'] : null;
 
         if($id != null){
             $dados['servico'] = $c->Selecionar('*', 'servico', ' WHERE id =' . $id)[0];

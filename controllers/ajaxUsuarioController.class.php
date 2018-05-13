@@ -14,19 +14,9 @@ class ajaxUsuarioController extends Controller {
         switch ($acao) {
             case 'salvar':
 
-                $l = new Servicos();
+                $user = new Usuarios();
 
-                $res = null;
-
-                if ($dados['id'] > 0 && $dados['id'] != null) {
-
-                    $res = $l->editar($dados);
-
-                } else {
-
-                    $res = $l->salvar($dados);
-
-                }
+                $res = $user->salvar($dados);
 
                 echo json_encode($res);
 

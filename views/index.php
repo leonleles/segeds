@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -52,7 +53,7 @@
 <!--                </a>-->
 <!--            </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="<?= BASE_URL ?>usuarioedit">
+                <a class="nav-link" href="<?= BASE_URL ?>usuariolist">
                     <i class="fa fa-fw fa-user-o"></i>
                     <span class="nav-link-text">Usuários</span>
                 </a>

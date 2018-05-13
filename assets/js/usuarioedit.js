@@ -1,27 +1,74 @@
 $(function () {
 
     var validacao = true;
+    var senhaok = "";
 
     var _construct = function () {
         salvar();
         mascaraNome();
+        verificasenha();
+
+
+        var id = $("#id").val();
+
+        if (id != null && id != "") {
+            senhaok = $("#senhaconfirm").val().trim();
+        }
+
+    };
+
+    var verificasenha = function () {
+
+        $("#senhaconfirm").on('keyup', function () {
+
+            if ($(this).val().trim() == $("#senha").val().trim()) {
+                $("#msgsenha2").text("As senha conferem!").css({color: "green"}).fadeIn(300);
+                senhaok = $(this).val().trim();
+                validacao = true;
+            } else if ($(this).val().trim() != $("#senha").val().trim()) {
+                $("#msgsenha2").text("As senha não conferem!").css({color: "red"}).fadeIn(300);
+                senhaok = "";
+                validacao = false;
+            }
+
+        });
+
+
+        $("#senha").on('keyup', function () {
+
+            senhaok = "";
+
+            $("#msgsenha2").text("As senha não conferem!").css({color: "red"}).fadeIn(300);
+
+            if ($(this).val().length < 6) {
+                $("#msgsenha1").text("Senha curta (Mínimo 6 caracteres)!").css({color: "red"}).fadeIn(300);
+                validacao = false;
+            }else{
+                $("#msgsenha1").text("Senha válida!").css({color: "green"}).fadeOut(6000);
+                validacao = true;
+            }
+
+        });
+
     };
 
     var salvar = function () {
 
-        $("#save-servico").on('click', function () {
+        $("#formulario").on('submit', function (e) {
+            e.preventDefault(e);
 
             if (validacao != false) {
 
                 validacao = false;
 
-                $(this).attr('id', '');
-                $(this).css('opacity', 0.5);
-
                 var nome = $('#nome').val();
+                var login = $('#login').val();
+                var tipo = $('#tipo').val();
                 var id = $("#id").val();
 
-                if (nome != null && nome != '') {
+                console.log(senhaok);
+
+                if (senhaok != "" && $("#senha").val().length >= 6) {
 
                     var ativo = '';
 
@@ -35,6 +82,9 @@ $(function () {
 
                     var dados = {
                         nome: nome,
+                        login: login,
+                        senha: senhaok,
+                        tipo_id: tipo,
                         ativo: ativo,
                         id: id
                     };
@@ -43,7 +93,7 @@ $(function () {
 
                     $.ajax({
                         type: 'POST',
-                        url: BASE_URL + 'ajaxServico',
+                        url: BASE_URL + 'ajaxUsuario',
                         data: {
                             acao: 'salvar',
                             dados: dados
@@ -53,18 +103,19 @@ $(function () {
                             console.log(retorno);
                             alert(retorno.msg);
 
-                            if(retorno.id > 0){
-                                window.location.href = BASE_URL+'/servicoedit?id='+retorno.id;
-                            }else{
+                            if (retorno.id > 0) {
+                                window.location.href = BASE_URL + 'usuarioedit?id=' + retorno.id;
+                            } else {
                                 window.location.reload();
                             }
 
                         }
                     });
-                } else {
-                    $('#nome').css('border-color', 'red').focus();
-                    alert('Campo Obrigatório!');
-                    $(this).css('opacity', 1);
+                }else{
+                    if($("#senha").val().trim().length < 6){
+                        $("#msgsenha1").text("Senha curta (Mínimo 6 caracteres)!").css({color: "red"}).fadeIn(300);
+                        validacao = true;
+                    }
                 }
             }
         });

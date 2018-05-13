@@ -12,3 +12,25 @@ main .form-group table > thead > th {
     border-top: none;
     color: #fff;
 }
+
+main .form-group table > tbody > tr > td input[type=text],
+main .form-group table > tbody > tr > td input[type=password]{
+    float: left;
+}
+
+
+main .form-group table > tbody > tr > td label{
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+}
+
+main .form-group table > tbody > tr > td span{
+    width: 100%;
+    color: red;
+    font-size: 12px;
+    float: left;
+    text-align: right;
+    display: none;
+    margin-top: 5px;
+}
