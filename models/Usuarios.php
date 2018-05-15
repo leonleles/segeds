@@ -104,4 +104,14 @@ class Usuarios extends Model {
         return $res;
 
     }
+
+    public function listarTipo ($id) {
+
+        $c = new CRUD();
+
+        $res = $c->Selecionar('*', 'usuario', " WHERE tipo_id={$id} order by nome");
+
+        return $res;
+
+    }
 }
