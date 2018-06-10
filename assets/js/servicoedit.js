@@ -39,8 +39,6 @@ $(function () {
                         id: id
                     };
 
-                    console.log(dados);
-
                     $.ajax({
                         type: 'POST',
                         url: BASE_URL + 'ajaxServico',

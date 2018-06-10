@@ -17,7 +17,7 @@
         <tbody>
 
         <td>
-            <input type="hidden" id="id" value="<?= 12 ?>">
+            <input type="hidden" id="id" value="<?= $solicitacao['id'] ?>">
 
 
             <label>Cliente:</label>
@@ -32,7 +32,7 @@
             </select>
 
             <label>Tipo de Serviço:</label>
-            <select id="cliente" name="cliente" class="form-control ls-select" required>
+            <select id="servico" name="cliente" class="form-control ls-select" required>
                 <option value=""></option>
                 <?php if (count($servicos) > 0) {
                     foreach ($servicos as $v) { ?>
@@ -44,15 +44,15 @@
             <fieldset>
                 <legend>Dados de Agendamento</legend>
 
-                <div class="form-group">
+                <div class="form-group" id="agendamento">
                     <label>Agendamento:</label>
-                    <input type="date" class="form-control col-4">
-                    <input type="time" class="form-control col-3">
+                    <input type="date" value="<?= $solicitacao['data'] ?>" class="form-control col-4">
+                    <input type="time" value="<?= $solicitacao['hora'] ?>" class="form-control col-3">
                 </div>
 
 
                 <label>Técnico:</label>
-                <select class="form-control ls-select" required>
+                <select class="form-control ls-select" id="tecnico" required>
                     <option value=""></option>
                     <?php if (count($tecnicos) > 0) {
                         foreach ($tecnicos as $v) { ?>
@@ -63,9 +63,6 @@
 
 
             </fieldset>
-
-            <label>Nome:</label>
-            <input type="text" class="form-control" id="nome" value="<?= "teste" ?>">
 
             <div class="form-group" style="margin-top: 30px">
                 <label for="ativo">Ativo:</label>
@@ -78,9 +75,9 @@
                 </div>
             </div>
 
-            <button type="button" style="margin-top: 30px;" class="btn btn-success save-solicitacao" id="save-servico">
+            <button type="button" style="margin-top: 30px;" class="btn btn-success save-solicitacao" id="save-solicitacao">
                 <i
-                        class="fa fa-upload"></i> Emitir
+                        class="fa fa-upload"></i> Salvar
             </button>
             <a class="btn btn-default" href="<?= BASE_URL ?>home" style="margin: 30px 0 0 10px"><i
                         class="fa fa-reply"></i> Voltar</a>
