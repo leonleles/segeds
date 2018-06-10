@@ -44,6 +44,18 @@ class ajaxController extends Controller {
 
                 break;
 
+            case 'carregardistritosativos':
+
+
+                $l = new Localidades();
+
+                $res = $l->selecionaDistritos($dados['id'], true);
+
+                echo json_encode($res);
+
+
+                break;
+
             case 'editarMunicipio':
 
                 $l = new Localidades();

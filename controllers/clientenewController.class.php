@@ -11,8 +11,11 @@ class clientenewController extends Controller {
 
         $dados['municipios'] = $l->municipiosAtivos();
 
-        $dados['distritos'] = $l->selecionaDistritos($dados['municipios'][0]['id']);
-
+        if(count($dados['municipios']) > 0) {
+            $dados['distritos'] = $l->selecionaDistritos($dados['municipios'][0]['id']);
+        }else{
+            $dados['distritos'] = null;
+        }
 
 
 

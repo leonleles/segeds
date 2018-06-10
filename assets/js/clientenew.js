@@ -75,7 +75,7 @@ $(function () {
                 type: 'POST',
                 url: BASE_URL + 'ajax',
                 data: {
-                    acao: 'carregardistritos',
+                    acao: 'carregardistritosativos',
                     dados: dados
                 },
                 dataType: 'json',

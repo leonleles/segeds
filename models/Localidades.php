@@ -64,12 +64,16 @@ class Localidades extends Model {
         return $final;
     }
 
-    public function selecionaDistritos ($id) {
+    public function selecionaDistritos ($id, $ativos = false) {
 
 
         $c = new CRUD();
 
-        $condicao = ' WHERE municipio_id = ' . $id . ' order by nome asc';
+        if ($ativos == false) {
+            $condicao = ' WHERE municipio_id = ' . $id . ' order by nome asc';
+        } else {
+            $condicao = ' WHERE municipio_id = ' . $id . ' and ativo = 1 order by nome asc';
+        }
 
         $res = $c->Selecionar('*', 'distrito', $condicao);
 
@@ -77,7 +81,7 @@ class Localidades extends Model {
 
     }
 
-    public function editMunicipio($dados){
+    public function editMunicipio ($dados) {
 
         $c = new CRUD();
 
@@ -89,7 +93,7 @@ class Localidades extends Model {
 
     }
 
-    public function editDistrito($dados){
+    public function editDistrito ($dados) {
 
         $c = new CRUD();
 
@@ -101,7 +105,7 @@ class Localidades extends Model {
 
     }
 
-    public function municipiosAtivos(){
+    public function municipiosAtivos () {
 
         $c = new CRUD();
 
