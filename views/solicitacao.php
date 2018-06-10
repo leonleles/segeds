@@ -32,6 +32,8 @@
 
             </select>
 
+            <span class="mensagem" id="msg_cliente"></span>
+
             <label>Tipo de Serviço:</label>
             <select id="servico" name="cliente" class="form-control ls-select" required>
                 <option value=""></option>
@@ -49,6 +51,12 @@
                     <label>Agendamento:</label>
                     <input type="date" value="<?= $solicitacao['data'] ?>" class="form-control col-4">
                     <input type="time" value="<?= $solicitacao['hora'] ?>" class="form-control col-3">
+                </div>
+
+                <div class="form-group" id="previsao">
+                    <label>Previsão:</label>
+                    <input type="date" value="<?= $solicitacao['data_previsao'] ?>" class="form-control col-4">
+                    <input type="time" value="<?= $solicitacao['hora_previsao'] ?>" class="form-control col-3">
                 </div>
 
 

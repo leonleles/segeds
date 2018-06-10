@@ -13,9 +13,9 @@ class Agendamento extends Model {
         date_default_timezone_set('America/Sao_Paulo');
         $emissao = date('Y-m-d H:i');
 
-        $items = "'{$emissao}','{$dados['agendamento']}', '{$dados['tecnico_id']}', '{$dados['ativo']}'";
+        $items = "'{$emissao}','{$dados['agendamento']}', '{$dados['previsao']}', '{$dados['tecnico_id']}', '{$dados['ativo']}'";
 
-        $res = $c->Salvar('agendamento', 'emissao, agendamento, tecnico_id, ativo', $items);
+        $res = $c->Salvar('agendamento', 'emissao, agendamento, previsao, tecnico_id, ativo', $items);
 
         return $res;
 
@@ -25,7 +25,7 @@ class Agendamento extends Model {
 
         $c = new CRUD();
 
-        $valores = "agendamento = '{$dados['agendamento']}', tecnico_id= '{$dados['tecnico_id']}', ativo = '{$dados['ativo']}'";
+        $valores = "agendamento = '{$dados['agendamento']}', previsao = '{$dados['previsao']}', tecnico_id= '{$dados['tecnico_id']}', ativo = '{$dados['ativo']}'";
 
         $res = $c->Update('agendamento', $valores, " where id = ".$dados['id_agendamento']);
 

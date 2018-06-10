@@ -2,6 +2,6 @@
 
 class Ids extends Model {
 
-    const TECNICO = 1;
+    const TECNICO = 2;
 
 }
