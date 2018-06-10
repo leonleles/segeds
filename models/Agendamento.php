@@ -23,6 +23,13 @@ class Agendamento extends Model {
 
     public function editar ($dados) {
 
+        $c = new CRUD();
+
+        $valores = "agendamento = '{$dados['agendamento']}', tecnico_id= '{$dados['tecnico_id']}', ativo = '{$dados['ativo']}'";
+
+        $res = $c->Update('agendamento', $valores, " where id = ".$dados['id_agendamento']);
+
+        return $res;
 
     }
 

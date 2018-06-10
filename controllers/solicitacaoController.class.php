@@ -22,8 +22,8 @@ class solicitacaoController extends Controller {
             $dados['solicitacao']['hora'] = date("H:i", strtotime($dados['solicitacao']['agendamento']));
         }
 
-        $dados['clientes'] = $c->Listar();
-        $dados['servicos'] = $s->listar();
+        $dados['clientes'] = $c->Listar(true);
+        $dados['servicos'] = $s->listar(true);
         $dados['tecnicos'] = $user->listarTipo(Ids::TECNICO);
 
         $this->setCss('assets/css/solicitacao.css');

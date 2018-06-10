@@ -12,6 +12,7 @@ $(function () {
 
             var dados = {};
             dados.id = $("#id").val();
+            dados.id_agendamento = $("#id_agendamento").val();
             dados.cliente_id = $("#cliente").val();
             dados.servico_id = $("#servico").val();
             dados.tecnico_id = $("#tecnico").val();
@@ -34,13 +35,12 @@ $(function () {
                 },
                 dataType: 'json',
                 success: function (retorno) {
-                    console.log(retorno);
-
-                    // if(retorno.id > 0){
-                    //     window.location.href = BASE_URL+'/servicoedit?id='+retorno.id;
-                    // }else{
-                    //     window.location.reload();
-                    // }
+                    alert(retorno['msg']);
+                    if(retorno.id > 0){
+                        window.location.href = BASE_URL+'/solicitacao?id='+retorno.id;
+                    }else{
+                        window.location.reload();
+                    }
 
                 }
             });

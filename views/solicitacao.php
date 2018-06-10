@@ -18,6 +18,7 @@
 
         <td>
             <input type="hidden" id="id" value="<?= $solicitacao['id'] ?>">
+            <input type="hidden" id="id_agendamento" value="<?= $solicitacao['id_agendamento'] ?>">
 
 
             <label>Cliente:</label>

@@ -8,15 +8,33 @@ class Solicitacoes extends Model {
         $a = new Agendamento();
         $res = [];
 
-        $agendamento = $a->salvar($dados);
+        if ($dados['id'] != null) {
 
-        $items = "'{$dados['cliente_id']}','{$agendamento}', '{$dados['servico_id']}', '{$dados['ativo']}'";
+            $a->editar($dados);
 
-        $id = $c->Salvar('solicitacao', 'cliente_id, agendamento_id, servico_id, ativo', $items);
+            $valores = "cliente_id = '{$dados['cliente_id']}', servico_id= '{$dados['servico_id']}', ativo = '{$dados['ativo']}'";
 
-        if ($id > 0) {
-            $res['id'] = $id;
-            $res['msg'] = 'Salvo!';
+            $retorno = $c->Update('solicitacao', $valores, " where id =".$dados['id']);
+
+            if($retorno > 0){
+                $res['msg'] = 'Salvo!';
+            }else{
+                $res['msg'] = 'Salvo!';
+            }
+
+        } else {
+
+            $agendamento = $a->salvar($dados);
+
+            $items = "'{$dados['cliente_id']}','{$agendamento}', '{$dados['servico_id']}', '{$dados['ativo']}'";
+
+            $id = $c->Salvar('solicitacao', 'cliente_id, agendamento_id, servico_id, ativo', $items);
+
+            if ($id > 0) {
+                $res['id'] = $id;
+                $res['msg'] = 'Salvo!';
+            }
+
         }
 
         return $res;
@@ -45,7 +63,7 @@ class Solicitacoes extends Model {
           left join agendamento a on s.agendamento_id = a.id 
           where s.id =";
 
-        $res = $c->Query($sql.$id);
+        $res = $c->Query($sql . $id);
 
         return $res;
 

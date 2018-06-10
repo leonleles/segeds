@@ -63,11 +63,15 @@ class Clientes extends Model {
 
     }
 
-    public function Listar () {
+    public function Listar ($ativos = false) {
 
         $c = new CRUD();
 
-        $clientes = $c->Selecionar('*', 'cliente');
+        if ($ativos == false) {
+            $clientes = $c->Selecionar('*', 'cliente');
+        }else{
+            $clientes = $c->Selecionar('*', 'cliente', " where ativo = 1");
+        }
 
         return $clientes;
 

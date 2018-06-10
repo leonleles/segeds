@@ -53,20 +53,26 @@ class Servicos extends Model {
 
     }
 
-    public function listar () {
+    public function listar ($ativos = false) {
 
         $c = new CRUD();
 
-        $res = $c->Selecionar('*', 'servico', ' order by nome');
+        if ($ativos == false) {
 
-        if (count($res) > 0) {
-            foreach ($res as $i => $v) {
-                if ($res[$i]['ativo'] == 1) {
-                   $res[$i]['ativo'] = "Sim";
-                }else{
-                    $res[$i]['ativo'] = "Não";
+            $res = $c->Selecionar('*', 'servico', ' order by nome');
+
+            if (count($res) > 0) {
+                foreach ($res as $i => $v) {
+                    if ($res[$i]['ativo'] == 1) {
+                        $res[$i]['ativo'] = "Sim";
+                    } else {
+                        $res[$i]['ativo'] = "Não";
+                    }
                 }
             }
+        } else {
+
+            $res = $c->Selecionar('*', 'servico', ' where ativo = 1 order by nome');
         }
 
         return $res;
