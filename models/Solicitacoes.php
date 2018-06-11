@@ -85,17 +85,20 @@ class Solicitacoes extends Model {
      * Verifica se cliente já possui uma solicitacao em aberto ou em andamento
      * @return array
      */
-    public function verificarCliente ($cliente_id) {
+    public function verificarCliente ($dados) {
 
         $c = new CRUD();
         $res = [];
 
-        $agenda_id = $c->Selecionar('*', 'solicitacao', ' where cliente_id=' . $cliente_id);
+        $agenda_id = $c->Selecionar('*', 'solicitacao', ' where cliente_id=' . $dados['cliente_id']);
 
         if (count($agenda_id) > 0) {
 
-            $status = $c->Selecionar('*', 'agendamento', "where id ={$agenda_id[0]['agendamento_id']} and status > 1");
-
+            if($dados['id_agendamento'] != null) {
+                $status = $c->Selecionar('*', 'agendamento', "where id ={$agenda_id[0]['agendamento_id']} and status > 1 and id != {$dados['id_agendamento']}");
+            }else{
+                $status = $c->Selecionar('*', 'agendamento', "where id ={$agenda_id[0]['agendamento_id']} and status > 1");
+            }
             if (count($status) > 0) {
 
                 if ($status[0]['status'] == 2) {
@@ -115,6 +118,27 @@ class Solicitacoes extends Model {
         }
 
         return $res;
+
+    }
+
+
+    /**
+     * @param $dados
+     * Verifica disponibilidade de horario e disponibilidade de técnico
+     * @return int
+     */
+    public function verificarHorario ($dados) {
+
+        $c = new CRUD();
+
+        if ($dados['id_agendamento'] != null) {
+            $condicao = " WHERE '{$dados['agendamento']}' >= agendamento AND '{$dados['agendamento']}' <= previsao and tecnico_id = {$dados['tecnico_id']} and id != {$dados['id_agendamento']}";
+        } else {
+            $condicao = " WHERE '{$dados['agendamento']}' >= agendamento AND '{$dados['agendamento']}' <= previsao and tecnico_id = {$dados['tecnico_id']}";
+        }
+        $res = $c->Selecionar('*', 'agendamento', $condicao);
+
+        return count($res);
 
     }
 }

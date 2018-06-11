@@ -26,7 +26,17 @@ class ajaxSolicitacaoController extends Controller {
 
                 $l = new Solicitacoes();
 
-                $res = $l->verificarCliente($dados['cliente_id']);
+                $res = $l->verificarCliente($dados);
+
+                echo json_encode($res);
+
+                break;
+
+            case 'verificarhorario':
+
+                $l = new Solicitacoes();
+
+                $res = $l->verificarHorario($dados);
 
                 echo json_encode($res);
 

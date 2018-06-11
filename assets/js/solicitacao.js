@@ -2,17 +2,20 @@ $(function () {
 
 
     var verificacao_cliente = false;
+    var verificacao_horario = false;
 
     var _construct = function () {
 
-        verificarCliente();
         salvar();
 
     };
 
     var salvar = function () {
 
-        $("#save-solicitacao").click(function () {
+        $("#formulario").submit(function (e) {
+            e.preventDefault();
+            verificarCliente();
+            verificarHorario();
 
             var dados = {};
             dados.id = $("#id").val();
@@ -31,9 +34,8 @@ $(function () {
                 dados.ativo = 0;
             }
 
-            verificarCliente(dados);
+            if (verificacao_cliente != false && verificacao_horario != false) {
 
-            if (verificacao_cliente != false) {
                 $.ajax({
                     type: 'POST',
                     url: BASE_URL + 'ajaxSolicitacao',
@@ -55,29 +57,63 @@ $(function () {
         });
     };
 
-    var verificarCliente = function (dados) {
+    var verificarHorario = function () {
+
+
+        $("#msghorario").fadeOut(300).html("");
+
+        var dados = {};
+        dados.tecnico_id = $("#tecnico").val();
+        dados.agendamento = $("#agendamento").find("input[type=date]").val() + " " + $("#agendamento").find("input[type=time]").val();
+        dados.previsao = $("#previsao").find("input[type=date]").val() + " " + $("#previsao").find("input[type=time]").val();
+        dados.id_agendamento = $("#id_agendamento").val();
 
         $.ajax({
             type: 'POST',
             url: BASE_URL + 'ajaxSolicitacao',
             data: {
-                acao: 'verificarcliente',
+                acao: 'verificarhorario',
                 dados: dados
             },
             dataType: 'json',
             success: function (retorno) {
-                if (retorno) {
-                    verificacao_cliente = retorno['valor'];
-
-                    if (retorno['valor'] != true) {
-                        $("#msg_cliente").fadeIn(300).html(retorno['msg']);
-                    } else {
-                        $("#msg_cliente").fadeOut(300).html("");
-                    }
+                if (retorno > 0) {
+                    verificacao_horario = false;
+                    $("#msghorario").fadeIn(300).html("Horário insdisponível para este técnico.");
+                } else {
+                    verificacao_horario = true;
+                    $("#msghorario").fadeOut(300).html("");
                 }
             }
         });
+    };
 
+    var verificarCliente = function () {
+
+            var dados = {};
+            dados.cliente_id = $("#cliente").val();
+            dados.id_agendamento = $("#id_agendamento").val();
+
+            $.ajax({
+                type: 'POST',
+                url: BASE_URL + 'ajaxSolicitacao',
+                data: {
+                    acao: 'verificarcliente',
+                    dados: dados
+                },
+                dataType: 'json',
+                success: function (retorno) {
+                    if (retorno) {
+                        verificacao_cliente = retorno['valor'];
+
+                        if (retorno['valor'] != true) {
+                            $("#msg_cliente").fadeIn(300).html(retorno['msg']);
+                        } else {
+                            $("#msg_cliente").fadeOut(300).html("");
+                        }
+                    }
+                }
+            });
     };
 
 
