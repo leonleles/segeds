@@ -94,9 +94,9 @@ class Solicitacoes extends Model {
 
         if (count($agenda_id) > 0) {
 
-            if($dados['id_agendamento'] != null) {
+            if ($dados['id_agendamento'] != null) {
                 $status = $c->Selecionar('*', 'agendamento', "where id ={$agenda_id[0]['agendamento_id']} and status > 1 and id != {$dados['id_agendamento']}");
-            }else{
+            } else {
                 $status = $c->Selecionar('*', 'agendamento', "where id ={$agenda_id[0]['agendamento_id']} and status > 1");
             }
             if (count($status) > 0) {
@@ -132,9 +132,11 @@ class Solicitacoes extends Model {
         $c = new CRUD();
 
         if ($dados['id_agendamento'] != null) {
-            $condicao = " WHERE '{$dados['agendamento']}' >= agendamento AND '{$dados['agendamento']}' <= previsao and tecnico_id = {$dados['tecnico_id']} and id != {$dados['id_agendamento']}";
+            $condicao = "WHERE (( previsao > '{$dados['agendamento']}' AND previsao < '{$dados['previsao']}' ) or
+	        ( agendamento < '{$dados['previsao']}' AND agendamento > '{$dados['agendamento']}' )) and tecnico_id = {$dados['tecnico_id']}  and id != {$dados['id_agendamento']}";
         } else {
-            $condicao = " WHERE '{$dados['agendamento']}' >= agendamento AND '{$dados['agendamento']}' <= previsao and tecnico_id = {$dados['tecnico_id']}";
+            $condicao = "WHERE (( previsao > '{$dados['agendamento']}' AND previsao < '{$dados['previsao']}' ) or
+	        ( agendamento < '{$dados['previsao']}' AND agendamento > '{$dados['agendamento']}' )) and tecnico_id = {$dados['tecnico_id']}";
         }
         $res = $c->Selecionar('*', 'agendamento', $condicao);
 

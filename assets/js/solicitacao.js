@@ -79,7 +79,7 @@ $(function () {
             success: function (retorno) {
                 if (retorno > 0) {
                     verificacao_horario = false;
-                    $("#msghorario").fadeIn(300).html("Horário insdisponível para este técnico.");
+                    $("#msghorario").fadeIn(300).html("Horário insdisponível para este técnico. Verifique suas solicitações <a href='"+BASE_URL+"home'>aqui.</a>");
                 } else {
                     verificacao_horario = true;
                     $("#msghorario").fadeOut(300).html("");
