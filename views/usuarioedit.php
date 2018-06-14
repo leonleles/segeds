@@ -1,7 +1,7 @@
 <!-- ORIENTACAO -->
 <ol class="breadcrumb">
     <li class="breadcrumb-item">
-        <a href="<?= BASE_URL ?>home"">Início</a>
+        <a href="<?= BASE_URL ?>usuariolist"">Início</a>
     </li>
     <li class="breadcrumb-item active">Usuário</li>
 </ol>
