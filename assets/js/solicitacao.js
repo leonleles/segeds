@@ -3,6 +3,7 @@ $(function () {
 
     var verificacao_cliente = 'false';
     var verificacao_horario = 'false';
+    var verificacao_data = 'false';
 
     var _construct = function () {
 
@@ -88,7 +89,7 @@ $(function () {
             dados.ativo = 0;
         }
 
-        if (verificacao_cliente != 'false' && verificacao_horario != 'false') {
+        if (verificacao_cliente != 'false' && verificacao_horario != 'false' && verificacao_data != 'false') {
 
             $.ajax({
                 type: 'POST',
@@ -110,8 +111,18 @@ $(function () {
         } else {
             alert("Dados inválidos.");
         }
+    };
 
+    var verificaragenda = function () {
+        var agendamento = $("#agendamento").find("input[type=date]").val() + " " + $("#agendamento").find("input[type=time]").val();
+        var previsao = $("#previsao").find("input[type=date]").val() + " " + $("#previsao").find("input[type=time]").val();
 
+        if(agendamento != previsao && previsao > agendamento){
+            verificacao_data = 'true';
+        }else{
+            verificacao_data = 'false';
+            alert("Previsão deve ser maior que agendamento!");
+        }
     };
 
     var salvar = function () {
@@ -121,6 +132,7 @@ $(function () {
 
             verificarCliente();
             verificarHorario();
+            verificaragenda();
             post();
 
         });

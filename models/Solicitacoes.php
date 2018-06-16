@@ -90,31 +90,29 @@ class Solicitacoes extends Model {
         $c = new CRUD();
         $res = [];
 
-        $agenda_id = $c->Selecionar('*', 'solicitacao', ' where cliente_id=' . $dados['cliente_id']);
+        $sql = "
+        SELECT
+	      * 
+        FROM
+	    solicitacao s
+	    LEFT JOIN agendamento a ON s.agendamento_id = a.id 
+        WHERE
+	    s.cliente_id = {$dados['cliente_id']} 
+	    AND status > 1 
+	    AND a.ativo = 1";
 
-        if (count($agenda_id) > 0) {
+        if($dados['id_agendamento']){
+            $sql .= " and a.id != {$dados['id_agendamento']}";
+        }
 
-            if ($dados['id_agendamento'] != null) {
-                $status = $c->Selecionar('*', 'agendamento', "where id ={$agenda_id[0]['agendamento_id']} and status > 1 and id != {$dados['id_agendamento']}");
-            } else {
-                $status = $c->Selecionar('*', 'agendamento', "where id ={$agenda_id[0]['agendamento_id']} and status > 1");
-            }
-            if (count($status) > 0) {
+        $retorno = $c->Query($sql);
 
-                if ($status[0]['status'] == 2) {
-                    $res['msg'] = "Já possui solicitação em aberto";
-                    $res['valor'] = false;
-                } else if ($status[0]['status'] == 3) {
-                    $res['msg'] = "Já possui solicitação em andamento";
-                    $res['valor'] = false;
-                }
-            } else {
-                $res['msg'] = null;
-                $res['valor'] = true;
-            }
-        } else {
-            $res['msg'] = null;
+        if(count($retorno) > 0){
+            $res['valor'] = false;
+            $res['msg'] = "Já possui uma solicitação em andamento.";
+        }else{
             $res['valor'] = true;
+            $res['msg'] = "";
         }
 
         return $res;
