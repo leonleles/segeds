@@ -21,6 +21,17 @@ class ajaxUsuarioController extends Controller {
                 echo json_encode($res);
 
                 break;
+
+            case "login":
+
+                $user = new Usuarios();
+
+                $res = $user->login($dados['login'], $dados['senha']);
+
+                echo json_encode($res);
+
+
+                break;
         }
 
     }

@@ -18,16 +18,20 @@
 </head>
 <body class="body">
 <main>
-    <form action="">
+    <form id="form_login">
         <span class="titulo">SEGEDS admin</span>
-        <input type="text" name="login" placeholder="Login">
-        <input type="password" name="senha" placeholder="Senha">
+        <input type="text" required name="login" placeholder="Login">
+        <input type="password" required name="senha" placeholder="Senha">
 
-        <button>LOGIN</button>
+        <button type="submit">LOGIN</button>
+
+        <span class="msg" id="msg"></span>
+
     </form>
 </main>
 
-
+<script type="text/javascript">var BASE_URL = "<?php echo BASE_URL; ?>";</script>
 <script src="<?= BASE_URL ?>vendor/jquery/jquery.min.js"></script>
+<script src="<?= BASE_URL ?>assets/js/login.js"></script>
 </body>
 </html>

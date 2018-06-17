@@ -5,17 +5,17 @@ class Usuarios extends Model {
 
         $return = array();
 
-        $sql = "SELECT * FROM usuario WHERE login = ? AND senha = ?";
+        $sql = "SELECT * FROM usuario WHERE login = ? AND senha = ? AND ativo = ?";
         $sql = $this->db->prepare($sql);
 
-        $sql->execute([$user, md5($pass)]);
+        $sql->execute([$user, $pass, 1]);
 
         if ($sql->rowCount() > 0) {
             $user = $sql->fetch();
 
             $_SESSION['login'] = $user['id'];
-            $_SESSION['user_name'] = $user['nome'];
-            $_SESSION['user_level'] = $user['level'];
+            $_SESSION['nome'] = $user['nome'];
+            $_SESSION['tipo_id'] = $user['tipo_id'];
 
             $return['condicao'] = true;
             $return['msg'] = "Usuário logado com sucesso";

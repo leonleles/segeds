@@ -3,24 +3,30 @@ $(function () {
     $("#form_login").on('submit', function (e) {
         e.preventDefault();
 
-        var user = $('input[name=user]').val();
-        var pass = $('input[name=pass]').val();
+        $("#msg").html("").fadeOut(300);
 
-        var dados = {user: user, pass: pass};
+        var login = $('input[name=login]').val();
+        var senha = $('input[name=senha]').val();
+
+        var dados = {login: login, senha: senha};
 
         $.ajax({
             type: 'POST',
-            url: BASE_URL + 'ajax',
+            url: BASE_URL + 'ajaxUsuario',
             data: {
                 acao: 'login',
                 dados: dados
             },
             dataType: 'json',
+            async: false,
             success: function (retorno) {
-                if (retorno.condicao) {
-                    window.location = BASE_URL + 'home';
-                } else {
-                    alert(retorno.msg);
+
+                if(retorno){
+                    if(retorno['condicao'] == false){
+                        $("#msg").html(retorno['msg']).fadeIn(300);
+                    }else{
+                        location.reload();
+                    }
                 }
             }
         })
