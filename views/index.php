@@ -43,7 +43,7 @@
                 </li>
             <?php } ?>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Solicitações">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?= BASE_URL ?>solicitacoes">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Solicitações</span>
                 </a>

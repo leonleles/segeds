@@ -1,0 +1,84 @@
+.tabela{
+    width: 100%;
+    float: left;
+    background-color: #f2f2f2;
+}
+
+.tabela .titulo{
+    width: 100%;
+    float: left;
+    background-color: #3c8dbc;
+    color: #fff;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.tabela fieldset{
+    width: calc(100% - 30px);
+    float: left;
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid #c6c6c6;
+}
+
+.tabela fieldset legend{
+    font-size: 16px;
+    color: #4e555b;
+    font-weight: bold;
+    margin: 0;
+    width: auto;
+}
+
+.tabela fieldset .opcoes{
+    width: 100%;
+    float: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tabela fieldset .opcoes .item{
+    display: flex;
+    align-items: center;
+}
+
+.tabela fieldset .opcoes .item p{
+    margin: 0;
+    margin-right: 10px;
+}
+
+.tabela fieldset .resultados{
+    width: 100%;
+    float: left;
+}
+
+.tabela .resultados table{
+    background: #fff;
+}
+
+.tabela .resultados table tr td:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabela .resultados table tr td:first-child i{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #c6c6c6;
+}
+
+.tabela .resultados table tr td:first-child .andamento {
+    border: none;
+    background-color: #ffcd00;
+}
+
+.tabela .resultados table tr td:first-child .atrasado {
+    border: none;
+    background-color: #ff001c;
+}
+
+.tabela .resultados table tr td:first-child .proximo {
+    border: none;
+    background-color: #00b512;
+}
