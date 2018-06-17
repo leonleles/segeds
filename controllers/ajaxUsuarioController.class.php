@@ -32,6 +32,13 @@ class ajaxUsuarioController extends Controller {
 
 
                 break;
+
+            case "logout":
+
+                session_destroy();
+                echo json_encode(1);
+
+                break;
         }
 
     }

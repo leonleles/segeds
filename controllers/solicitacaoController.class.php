@@ -2,13 +2,17 @@
 
 class solicitacaoController extends Controller {
 
-    public function index() {
+    public function index () {
         $dados = array();
         $i = new Ids();
         $c = new Clientes();
         $s = new Servicos();
         $user = new Usuarios();
         $so = new Solicitacoes();
+
+        if (!empty($_SESSION) && $_SESSION['tipo_id'] > 4) {
+            header('Location:'.BASE_URL."home");
+        }
 
         //inicializa variaveis
         $dados['solicitacao']['ativo'] = null;
@@ -22,7 +26,7 @@ class solicitacaoController extends Controller {
         $dados['solicitacao']['data_previsao'] = null;
         $dados['solicitacao']['hora_previsao'] = null;
 
-        if(isset($_GET['id']) && $_GET['id'] != null){
+        if (isset($_GET['id']) && $_GET['id'] != null) {
             $dados['solicitacao'] = $so->selecionarId($_GET['id'])[0];
             //dados de agendamento
             $dados['solicitacao']['data'] = date("Y-m-d", strtotime($dados['solicitacao']['agendamento']));

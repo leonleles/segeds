@@ -5,6 +5,10 @@ class distritoeditController extends Controller {
     public function index() {
         $dados = array();
 
+        if (!empty($_SESSION) && $_SESSION['tipo_id'] > 4) {
+            header('Location:'.BASE_URL."home");
+        }
+
         $c = new CRUD();
         $l = new Localidades();
 

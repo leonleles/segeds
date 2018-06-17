@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -34,45 +34,53 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nova Solicitação">
-                <a class="nav-link" href="<?= BASE_URL ?>solicitacao">
-                    <i class="fa fa-fw fa-edit"></i>
-                    <span class="nav-link-text">Nova Solicitação</span>
-                </a>
-            </li>
+            <?php if (!empty($_SESSION) && $_SESSION['tipo_id'] < 5) { ?>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nova Solicitação">
+                    <a class="nav-link" href="<?= BASE_URL ?>solicitacao">
+                        <i class="fa fa-fw fa-edit"></i>
+                        <span class="nav-link-text">Nova Solicitação</span>
+                    </a>
+                </li>
+            <?php } ?>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Solicitações">
                 <a class="nav-link" href="tables.html">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Solicitações</span>
                 </a>
             </li>
-<!--            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">-->
-<!--                <a class="nav-link" href="charts.html">-->
-<!--                    <i class="fa fa-fw fa-area-chart"></i>-->
-<!--                    <span class="nav-link-text">Charts</span>-->
-<!--                </a>-->
-<!--            </li>-->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="<?= BASE_URL ?>usuariolist">
-                    <i class="fa fa-fw fa-user-o"></i>
-                    <span class="nav-link-text">Usuários</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Clientes">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-users"></i>
-                    <span class="nav-link-text">Clientes</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
-                        <a href="<?= BASE_URL ?>clientenew?s=home"><i class="fa fa-fw fa-user-plus"></i>  Adicionar Novo</a>
-                    </li>
-                    <li>
-                        <a href="<?= BASE_URL ?>clientelist"><i class="fa fa-fw fa-cog"></i>  Gerenciar</a>
-                    </li>
-                </ul>
-            </li>
+            <!--            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">-->
+            <!--                <a class="nav-link" href="charts.html">-->
+            <!--                    <i class="fa fa-fw fa-area-chart"></i>-->
+            <!--                    <span class="nav-link-text">Charts</span>-->
+            <!--                </a>-->
+            <!--            </li>-->
+
+            <?php if (!empty($_SESSION) && $_SESSION['tipo_id'] < 4) { ?>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+                    <a class="nav-link" href="<?= BASE_URL ?>usuariolist">
+                        <i class="fa fa-fw fa-user-o"></i>
+                        <span class="nav-link-text">Usuários</span>
+                    </a>
+                </li>
+            <?php } ?>
+
+            <?php if (!empty($_SESSION) && $_SESSION['tipo_id'] < 5) { ?>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Clientes">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+                       data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-users"></i>
+                        <span class="nav-link-text">Clientes</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseComponents">
+                        <li>
+                            <a href="<?= BASE_URL ?>clientenew?s=home"><i class="fa fa-fw fa-user-plus"></i> Adicionar
+                                Novo</a>
+                        </li>
+                        <li>
+                            <a href="<?= BASE_URL ?>clientelist"><i class="fa fa-fw fa-cog"></i> Gerenciar</a>
+                        </li>
+                    </ul>
+                </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configurações">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
                    data-parent="#exampleAccordion">
@@ -81,46 +89,47 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseExamplePages">
                     <li>
-                        <a href="<?= BASE_URL ?>localidadelist"><i class="fa fa-fw fa-map-o"></i>  Localidades</a>
+                        <a href="<?= BASE_URL ?>localidadelist"><i class="fa fa-fw fa-map-o"></i> Localidades</a>
                     </li>
                     <li>
                         <a href="<?= BASE_URL ?>servicoslist"><i class="fa fa-wrench"></i> Serviços</a>
                     </li>
                 </ul>
             </li>
-<!--            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">-->
-<!--                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"-->
-<!--                   data-parent="#exampleAccordion">-->
-<!--                    <i class="fa fa-fw fa-sitemap"></i>-->
-<!--                    <span class="nav-link-text">Menu Levels</span>-->
-<!--                </a>-->
-<!--                <ul class="sidenav-second-level collapse" id="collapseMulti">-->
-<!--                    <li>-->
-<!--                        <a href="#">Second Level Item</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a href="#">Second Level Item</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a href="#">Second Level Item</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third-->
-<!--                            Level</a>-->
-<!--                        <ul class="sidenav-third-level collapse" id="collapseMulti2">-->
-<!--                            <li>-->
-<!--                                <a href="#">Third Level Item</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a href="#">Third Level Item</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a href="#">Third Level Item</a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </li>-->
+            <?php } ?>
+            <!--            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">-->
+            <!--                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"-->
+            <!--                   data-parent="#exampleAccordion">-->
+            <!--                    <i class="fa fa-fw fa-sitemap"></i>-->
+            <!--                    <span class="nav-link-text">Menu Levels</span>-->
+            <!--                </a>-->
+            <!--                <ul class="sidenav-second-level collapse" id="collapseMulti">-->
+            <!--                    <li>-->
+            <!--                        <a href="#">Second Level Item</a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <a href="#">Second Level Item</a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <a href="#">Second Level Item</a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third-->
+            <!--                            Level</a>-->
+            <!--                        <ul class="sidenav-third-level collapse" id="collapseMulti2">-->
+            <!--                            <li>-->
+            <!--                                <a href="#">Third Level Item</a>-->
+            <!--                            </li>-->
+            <!--                            <li>-->
+            <!--                                <a href="#">Third Level Item</a>-->
+            <!--                            </li>-->
+            <!--                            <li>-->
+            <!--                                <a href="#">Third Level Item</a>-->
+            <!--                            </li>-->
+            <!--                        </ul>-->
+            <!--                    </li>-->
+            <!--                </ul>-->
+            <!--            </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Perfil">
                 <a class="nav-link" href="#">
                     <i class="fa fa-fw fa-user-circle-o"></i>
@@ -228,10 +237,11 @@
                     <a class="dropdown-item small" href="#">View all alerts</a>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-left: 50px">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <div class="form-control" style="border-radius: 0; font-size: 12px; margin-top: 5px">Leonardo Leles Alves | Admin</div>
+                        <div class="form-control"
+                             style="border-radius: 0; font-size: 12px; margin-top: 5px"><?= $_SESSION['nome'] . " | " . $_SESSION['tipo_nome'] ?></div>
                         <span class="input-group-append">
               </span>
                     </div>
@@ -279,7 +289,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Sair</a>
+                    <a class="btn btn-primary" id="logout" style="color: #fff">Sair</a>
                 </div>
             </div>
         </div>
@@ -298,6 +308,7 @@
     <!-- Custom scripts for this page-->
     <script src="<?= BASE_URL ?>assets/js/sb-admin-datatables.min.js"></script>
     <script src="<?= BASE_URL ?>assets/js/sb-admin-charts.min.js"></script>
+    <script src="<?= BASE_URL ?>assets/js/index.js"></script>
     <!-- Carregar js assets-->
     <?php foreach ($this->js as $js): ?>
         <script type="text/javascript" src="<?= BASE_URL . $js ?>"></script>
@@ -307,5 +318,3 @@
 </body>
 
 </html>
-
-<?php session_destroy();?>

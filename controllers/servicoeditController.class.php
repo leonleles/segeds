@@ -6,6 +6,10 @@ class servicoeditController extends Controller {
         $dados = array();
         $c = new CRUD();
 
+        if (!empty($_SESSION) && $_SESSION['tipo_id'] > 4) {
+            header('Location:'.BASE_URL."home");
+        }
+
         $id = (!empty($_GET['id'])) ? $_GET['id'] : null;
 
         if($id != null){

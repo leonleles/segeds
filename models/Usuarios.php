@@ -13,9 +13,12 @@ class Usuarios extends Model {
         if ($sql->rowCount() > 0) {
             $user = $sql->fetch();
 
+            $c = new CRUD();
+
             $_SESSION['login'] = $user['id'];
             $_SESSION['nome'] = $user['nome'];
             $_SESSION['tipo_id'] = $user['tipo_id'];
+            $_SESSION['tipo_nome'] = $c->Selecionar("nome", "tipo_usuario", " where id =" . $user['tipo_id'])[0]['nome'];
 
             $return['condicao'] = true;
             $return['msg'] = "Usuário logado com sucesso";
@@ -87,7 +90,13 @@ class Usuarios extends Model {
 
         $c = new CRUD();
 
-        $res = $c->Selecionar('*', 'usuario', ' order by nome');
+        $condicao = "";
+
+        if (!empty($_SESSION) && $_SESSION['tipo_id'] > 1) {
+            $condicao .= " where tipo_id != 1";
+        }
+
+        $res = $c->Selecionar('*', 'usuario', $condicao . ' order by nome');
 
         if (count($res) > 0) {
             foreach ($res as $i => $v) {
