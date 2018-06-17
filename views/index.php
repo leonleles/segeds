@@ -131,7 +131,7 @@
             <!--                </ul>-->
             <!--            </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Perfil">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?= BASE_URL ?>perfil">
                     <i class="fa fa-fw fa-user-circle-o"></i>
                     <span class="nav-link-text">Perfil</span>
                 </a>

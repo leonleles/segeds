@@ -22,6 +22,16 @@ class ajaxUsuarioController extends Controller {
 
                 break;
 
+            case 'salvarperfil':
+
+                $user = new Usuarios();
+
+                $res = $user->salvarperfil($dados);
+
+                echo json_encode($res);
+
+                break;
+
             case "login":
 
                 $user = new Usuarios();
@@ -37,6 +47,18 @@ class ajaxUsuarioController extends Controller {
 
                 session_destroy();
                 echo json_encode(1);
+
+                break;
+
+            case "senhaatual":
+
+                if($dados['senha'] == $_SESSION['senha']){
+                    $res = true;
+                }else{
+                    $res = false;
+                }
+
+                echo json_encode($res);
 
                 break;
         }

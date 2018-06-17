@@ -15,8 +15,10 @@ class Usuarios extends Model {
 
             $c = new CRUD();
 
-            $_SESSION['login'] = $user['id'];
+            $_SESSION['login'] = $user['login'];
+            $_SESSION['id'] = $user['id'];
             $_SESSION['nome'] = $user['nome'];
+            $_SESSION['senha'] = $user['senha'];
             $_SESSION['tipo_id'] = $user['tipo_id'];
             $_SESSION['tipo_nome'] = $c->Selecionar("nome", "tipo_usuario", " where id =" . $user['tipo_id'])[0]['nome'];
 
@@ -24,7 +26,7 @@ class Usuarios extends Model {
             $return['msg'] = "Usuário logado com sucesso";
         } else {
             $return['condicao'] = false;
-            $return['msg'] = "E-mail ou Senha Incorretos!";
+            $return['msg'] = "Login ou Senha Incorretos!";
         }
 
         return $return;
@@ -79,6 +81,41 @@ class Usuarios extends Model {
                 }
             }
 
+        }
+
+        return $res;
+
+
+    }
+
+    public function salvarperfil ($dados) {
+
+        $c = new CRUD();
+
+        $res = [];
+
+        $condicao = " WHERE login = '" . $dados['login'] . "' and id != {$dados['id']}";
+        $verifica = $c->Selecionar('*', 'usuario', $condicao);
+
+        if (count($verifica) > 0) {
+
+            $res['msg'] = 'Não foi possível salvar. Este login já pertence a outro registro!';
+
+        } else {
+
+            $valores = "nome = '{$dados['nome']}', login ='{$dados['login']}', tipo_id ='{$dados['tipo_id']}', ativo='{$dados['ativo']}'";
+
+            if($dados['senha']){
+                $valores .= ", senha ='{$dados['senha']}'";
+            }
+
+            $id = $c->Update('usuario', $valores, " WHERE id = {$dados['id']}");
+
+            if ($id > 0) {
+                $res['msg'] = 'Salvo!';
+            } else {
+                $res['msg'] = 'Altere o registro para salvar!';
+            }
         }
 
         return $res;

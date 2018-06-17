@@ -1,16 +1,12 @@
 <?php
 
-class usuarioeditController extends Controller {
+class perfilController extends Controller {
 
     public function index () {
         $dados = array();
         $c = new CRUD();
 
-        if (!empty($_SESSION) && $_SESSION['tipo_id'] > 3) {
-            header('Location:'.BASE_URL."home");
-        }
-
-        $id = (!empty($_GET['id'])) ? $_GET['id'] : null;
+        $id = (!empty($_SESSION['id'])) ? $_SESSION['id'] : null;
 
         if($id != null){
             $dados['usuario'] = $c->Selecionar('*', 'usuario', ' WHERE id =' . $id)[0];
@@ -26,9 +22,9 @@ class usuarioeditController extends Controller {
         $dados['tipos'] = $c->Selecionar('*', 'tipo_usuario');
 
         $this->setCss('assets/css/usuarioedit.css');
-        $this->setJs('assets/js/usuarioedit.js');
+        $this->setJs('assets/js/perfil.js');
 
-        $this->loadTemplate('usuarioedit', $dados);
+        $this->loadTemplate('perfil', $dados);
     }
 
 }

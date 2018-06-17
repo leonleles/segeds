@@ -5,7 +5,7 @@ class usuariolistController extends Controller {
     public function index () {
         $dados = array();
 
-        if (!empty($_SESSION) && $_SESSION['tipo_id'] > 4) {
+        if (!empty($_SESSION) && $_SESSION['tipo_id'] > 3) {
             header('Location:'.BASE_URL."home");
         }
 
