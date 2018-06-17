@@ -98,6 +98,7 @@ $(function () {
                         dados: dados
                     },
                     dataType: 'json',
+                    async: false,
                     success: function (retorno) {
 
                         $(this).attr('id', 'add-municipio');
@@ -107,7 +108,7 @@ $(function () {
 
                         if (retorno > 0) {
                             window.location = BASE_URL + 'localidadelist';
-                        } else if (retorno = 'duplicate') {
+                        } else if (retorno == 'duplicate') {
                             $('#nome-municipio').focus();
                             alert('Registro já existe!');
                         }
@@ -217,6 +218,7 @@ $(function () {
                     dados: dados
                 },
                 dataType: 'json',
+                async: false,
                 success: function (retorno) {
 
                     if (retorno.length > 0) {

@@ -12,7 +12,7 @@ class Controller {
     }
 
     public function loadTemplate ($viewName, $viewData = array()) {
-        require 'views/index.php';
+            require 'views/login.php';
     }
 
     public function loadViewInTemplate ($viewName, $viewData = array()) {
@@ -30,7 +30,7 @@ class Controller {
 
     public function verificaLogin () {
         if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('Location: ' . BASE_URL . 'home');
+            header('Location: ' . BASE_URL . 'login');
             exit;
         }
     }
