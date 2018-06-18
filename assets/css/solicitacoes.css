@@ -101,10 +101,10 @@
     z-index: 999999;
     top: 0;
     left: 0;
-    display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.2);
+    display: none;
 }
 
 .popup .container {
@@ -176,4 +176,17 @@
     float: left;
     margin-bottom: 10px;
     font-size: 14px;
+}
+
+.popup .container .conteudo select{
+    width: 50%;
+    float: left;
+    margin-top: 20px;
+    margin-left: 15%;
+}
+
+.popup .container .conteudo button{
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
 }

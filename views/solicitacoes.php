@@ -67,7 +67,7 @@
                 <td></td>
                 <td style="width: 80px">
                     <i class="fa fa-eye"></i>
-                    <i class="fa fa-cog"></i>
+                    <i class="fa fa-cog opcoes"></i>
                 </td>
             </tr>
             </tbody>
@@ -83,13 +83,22 @@
         <div class="conteudo">
             <fieldset>
                 <legend>Informações</legend>
-
                 <div class="dados">
                     <div class="item"><b>Nome:</b> Leonardo Leles</div>
+                    <div class="item"><b>Telefone:</b> (62)9 9159-3277</div>
                     <div class="item"><b>Municipio:</b> Ceres</div>
+                    <div class="item"><b>Distrito:</b> Nenhum</div>
+                    <div class="item"><b>Endereço:</b> Rua ps 03 - QD T LT 10</div>
+                    <div class="item"><b>Complemento:</b> Em frente a rua do estadio</div>
                 </div>
-
             </fieldset>
+            <select class="form-control" id="">
+                <option value="">Aberto</option>
+                <option value="">Em andamento</option>
+                <option value="">Concluído</option>
+                <option value="">Cancelado</option>
+            </select>
+            <button class="btn btn-dark">Alterar</button>
         </div>
     </div>
 </div>
