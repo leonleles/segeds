@@ -101,16 +101,16 @@ class Solicitacoes extends Model {
 	    AND status > 1 
 	    AND a.ativo = 1";
 
-        if($dados['id_agendamento']){
+        if ($dados['id_agendamento']) {
             $sql .= " and a.id != {$dados['id_agendamento']}";
         }
 
         $retorno = $c->Query($sql);
 
-        if(count($retorno) > 0){
+        if (count($retorno) > 0) {
             $res['valor'] = false;
             $res['msg'] = "Já possui uma solicitação em andamento.";
-        }else{
+        } else {
             $res['valor'] = true;
             $res['msg'] = "";
         }
@@ -139,6 +139,40 @@ class Solicitacoes extends Model {
         $res = $c->Selecionar('*', 'agendamento', $condicao);
 
         return count($res);
+
+    }
+
+    /**
+     * Maior que 1 será: 2 para aberto e 3 para em andamento
+     * Menor que 2 será : 1 para concluido e 0 para cancelado
+     **/
+    public function listarTodos () {
+
+        $c = new CRUD();
+
+        $res = $c->Query("select *, s.id as id_solicitacao from solicitacao s left join agendamento a on s.agendamento_id = a.id left join cliente e on s.cliente_id = e.id");
+        $final = [];
+
+        if (count($res) > 0) {
+            foreach ($res as $v) {
+                $v['agendamento'] = date("d/m/Y H:i:s", strtotime($v['agendamento']));
+                $v['previsao'] = date("d/m/Y H:i:s", strtotime($v['previsao']));
+
+                if($v['status'] == 1){
+                    $v['status'] = 'concluido';
+                }else if($v['status'] == 0){
+                    $v['status'] = 'atrasado';
+                }else if ($v['status'] == 2){
+                    $v['status'] = 'aberto';
+                }else if($v['status'] == 3){
+                    $v['status'] = 'andamento';
+                }
+
+                $final[] = $v;
+            }
+        }
+
+        return $final;
 
     }
 }

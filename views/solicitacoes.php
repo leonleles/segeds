@@ -59,7 +59,7 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="solicitacoes_items">
             <tr>
                 <td><i class="andamento"></i></td>
                 <td></td>
