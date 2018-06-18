@@ -48,8 +48,8 @@
     </fieldset>
 
     <div class="resultados">
-        <table  class="table table-bordered tabelacliente" id="dataTable" width="100%"
-                cellspacing="0">
+        <table class="table table-bordered tabelacliente" id="dataTable" width="100%"
+               cellspacing="0">
             <thead>
             <tr>
                 <th></th>
@@ -65,30 +65,31 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><i></i></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><i class="atrasado"></i></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><i class="proximo"></i></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="width: 80px">
+                    <i class="fa fa-eye"></i>
+                    <i class="fa fa-cog"></i>
+                </td>
             </tr>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="popup">
+    <div class="container">
+        <div class="top">
+            <div class="titulo">Ações</div>
+            <i class="fa fa-close"></i></div>
+        <div class="conteudo">
+            <fieldset>
+                <legend>Informações</legend>
+
+                <div class="dados">
+                    <div class="item"><b>Nome:</b> Leonardo Leles</div>
+                    <div class="item"><b>Municipio:</b> Ceres</div>
+                </div>
+
+            </fieldset>
+        </div>
     </div>
 </div>
