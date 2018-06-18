@@ -51,6 +51,49 @@
     float: left;
 }
 
+.tabela .legenda{
+    width: 100%;
+    float: left;
+    padding: 15px 20px;
+}
+
+.tabela .legenda .item{
+    margin-right: 20px;
+    float: left;
+    display: flex;
+    align-items: center;
+}
+
+.tabela .legenda .item i {
+    width: 15px;
+    height: 15px;
+    float: left;
+    border-radius: 50%;
+    border: 2px solid #c6c6c6;
+}
+
+.tabela .legenda .item .andamento {
+    border: none;
+    background-color: #ffcd00;
+}
+
+.tabela .legenda .item .atrasado {
+    border: none;
+    background-color: #ff001c;
+}
+
+.tabela .legenda .item .concluido {
+    border: none;
+    background-color: #00b512;
+}
+
+.tabela .legenda .item p{
+    float: left;
+    font-size: 14px;
+    margin: 0;
+    padding-left: 5px;
+}
+
 .tabela .resultados table {
     background: #fff;
 }

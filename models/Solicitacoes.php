@@ -150,7 +150,9 @@ class Solicitacoes extends Model {
 
         $c = new CRUD();
 
-        $res = $c->Query("select *, s.id as id_solicitacao from solicitacao s left join agendamento a on s.agendamento_id = a.id left join cliente e on s.cliente_id = e.id");
+        $condicao = " where s.ativo = 1 and a.status in(0, 2, 3)";
+
+        $res = $c->Query("select *, s.id as id_solicitacao from solicitacao s left join agendamento a on s.agendamento_id = a.id left join cliente e on s.cliente_id = e.id".$condicao." order by a.agendamento asc");
         $final = [];
 
         if (count($res) > 0) {

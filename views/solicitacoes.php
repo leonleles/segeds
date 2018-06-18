@@ -14,11 +14,6 @@
 
         <form class="opcoes">
             <div class="item">
-                <p>Data: </p>
-                <input type="date" class="form-control">
-            </div>
-
-            <div class="item">
                 <p>Técnico: </p>
                 <select class="form-control" id="">
                     <option value="">sdadsda</option>
@@ -38,6 +33,13 @@
                     <option value="">sdadsda</option>
                 </select>
             </div>
+
+            <div class="item">
+                <p>Status: </p>
+                <select class="form-control" id="">
+                    <option value="">sdadsda</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary" id="filtrar">
                 <i class="fa fa-search"></i> Filtrar
             </button>
@@ -47,8 +49,15 @@
         </form>
     </fieldset>
 
+    <div class="legenda">
+        <div class="item"><i></i> <p>Aberto</p></div>
+        <div class="item"><i class="andamento"></i> <p>Em andamento</p></div>
+        <div class="item"><i class="concluido"></i> <p>Concluído</p></div>
+        <div class="item"><i class="atrasado"></i><p>Cancelado ou Atrasado</p></div>
+    </div>
+
     <div class="resultados">
-        <table class="table table-bordered tabelacliente" id="dataTable" width="100%"
+        <table class="table table-bordered table-hover tabelacliente" id="dataTable" width="100%"
                cellspacing="0">
             <thead>
             <tr>
