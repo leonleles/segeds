@@ -46,6 +46,7 @@ $(function () {
             '                <td>'+v['nome']+'</td>' +
             '                <td>' + v['agendamento'] + '</td>' +
             '                <td>' + v['previsao'] + '</td>' +
+            '                <td>' + v['nome_tecnico'] + '</td>' +
             '                <td style="width: 80px">' +
             '                    <a href="'+BASE_URL+'solicitacao?id='+v['id_solicitacao']+'" target="_blank"><i class="fa fa-eye"></i></a>' +
             '                    <i class="fa fa-cog opcoes" id="'+v['id_solicitacao']+'"></i>' +

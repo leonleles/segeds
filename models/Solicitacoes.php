@@ -152,7 +152,7 @@ class Solicitacoes extends Model {
 
         $condicao = " where s.ativo = 1 and a.status in(0, 2, 3)";
 
-        $res = $c->Query("select *, s.id as id_solicitacao from solicitacao s left join agendamento a on s.agendamento_id = a.id left join cliente e on s.cliente_id = e.id".$condicao." order by a.agendamento asc");
+        $res = $c->Query("select *, s.id as id_solicitacao, u.nome as nome_tecnico from solicitacao s left join agendamento a on s.agendamento_id = a.id left join cliente e on s.cliente_id = e.id left join usuario u on u.id = a.tecnico_id" . $condicao . " order by a.agendamento asc");
         $final = [];
 
         if (count($res) > 0) {
@@ -160,17 +160,18 @@ class Solicitacoes extends Model {
                 $v['agendamento'] = date("d/m/Y H:i:s", strtotime($v['agendamento']));
                 $v['previsao'] = date("d/m/Y H:i:s", strtotime($v['previsao']));
 
-                if($v['status'] == 1){
+                if ($v['status'] == 1) {
                     $v['status'] = 'concluido';
-                }else if($v['status'] == 0){
+                } else if ($v['status'] == 0) {
                     $v['status'] = 'atrasado';
-                }else if ($v['status'] == 2){
+                } else if ($v['status'] == 2) {
                     $v['status'] = 'aberto';
-                }else if($v['status'] == 3){
+                } else if ($v['status'] == 3) {
                     $v['status'] = 'andamento';
                 }
 
-                if(strtotime($v['agendamento']) < strtotime(date('Y-m-d H:i'))){
+
+                if (date('d/m/Y H:i:s') > $v['agendamento']){
                     $v['status'] = "atrasado";
                 }
 
@@ -182,11 +183,9 @@ class Solicitacoes extends Model {
 
     }
 
-    public function selecionarSolicitacao(){
+    public function selecionarSolicitacao () {
 
         $c = new CRUD();
-
-
 
 
     }

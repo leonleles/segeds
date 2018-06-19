@@ -84,12 +84,14 @@
                 <th>Cliente</th>
                 <th>Agenda</th>
                 <th>Previsão</th>
+                <th>Técnico</th>
                 <th></th>
             </tr>
             </thead>
             <tbody id="solicitacoes_items">
             <tr>
                 <td><i class="andamento"></i></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
