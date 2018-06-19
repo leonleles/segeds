@@ -37,6 +37,7 @@
 }
 
 .tabela fieldset .opcoes .item {
+    max-width: 220px;
     display: flex;
     align-items: center;
 }

@@ -170,11 +170,24 @@ class Solicitacoes extends Model {
                     $v['status'] = 'andamento';
                 }
 
+                if(strtotime($v['agendamento']) < strtotime(date('Y-m-d H:i'))){
+                    $v['status'] = "atrasado";
+                }
+
                 $final[] = $v;
             }
         }
 
         return $final;
+
+    }
+
+    public function selecionarSolicitacao(){
+
+        $c = new CRUD();
+
+
+
 
     }
 }
