@@ -83,6 +83,15 @@
     background-color: #ff001c;
 }
 
+.tabela .resultados table tr .atrasado{
+    color: #ff001c;
+}
+
+.tabela .legenda .item .cancelado {
+    border: none;
+    background-color: #ff001c;
+}
+
 .tabela .legenda .item .concluido {
     border: none;
     background-color: #00b512;

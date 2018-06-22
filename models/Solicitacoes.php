@@ -166,9 +166,8 @@ class Solicitacoes extends Model {
 
         if (isset($dados['status']) && $dados['status'] != null) {
             if ($dados['status'] > 9) {
-                $data = date('Y-m-d H:i:s');
-                $condicao .= " and a.agendamento < '{$data}'";
-            }else{
+                $condicao .= " and NOW() > a.agendamento";
+            } else {
                 $condicao .= " and a.status = {$dados['status']}";
             }
         }
@@ -182,15 +181,16 @@ class Solicitacoes extends Model {
                 if ($v['status'] == 1) {
                     $v['status'] = 'concluido';
                 } else if ($v['status'] == 0) {
-                    $v['status'] = 'atrasado';
+                    $v['status'] = 'cancelado';
                 } else if ($v['status'] == 2) {
-                    $v['status'] = 'aberto';
+                    if ((int) strtotime($v['agendamento']) < (int) strtotime(date("Y-m-d H:i:s"))) {
+                        $v['status'] = "atrasado";
+                    } else {
+                        $v['status'] = 'aberto';
+                    }
+
                 } else if ($v['status'] == 3) {
                     $v['status'] = 'andamento';
-                }
-
-                if (strtotime(date('Y-m-d H:i:s')) > strtotime($v['agendamento'])) {
-                    $v['status'] = 'atrasado';
                 }
 
                 $v['agendamento'] = date("d/m/Y H:i:s", strtotime($v['agendamento']));

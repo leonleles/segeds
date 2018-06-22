@@ -72,7 +72,7 @@ class Servicos extends Model {
             }
         } else {
 
-            $res = $c->Selecionar('*', 'servico', ' where ativo = 1 order by nome');
+            $res = $c->Selecionar('*', 'servico', ' where ativo = 1 order by nome asc');
         }
 
         return $res;

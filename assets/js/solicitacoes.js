@@ -47,7 +47,7 @@ $(function () {
 
         var html = '<tr><td><i class="' + v['status'] + '"></i></td>' +
             '                <td>' + v['nome_cliente'] + '</td>' +
-            '                <td>' + v['agendamento'] + '</td>' +
+            '                <td class="' + v['status'] + '">' + v['agendamento'] + '</td>' +
             '                <td>' + v['previsao'] + '</td>' +
             '                <td>' + v['nome_tecnico'] + '</td>' +
             '                <td style="width: 80px">' +

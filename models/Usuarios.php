@@ -155,7 +155,7 @@ class Usuarios extends Model {
 
         $c = new CRUD();
 
-        $res = $c->Selecionar('*', 'usuario', " WHERE tipo_id={$id} order by nome");
+        $res = $c->Selecionar('*', 'usuario', " WHERE tipo_id={$id} order by nome asc");
 
         return $res;
 

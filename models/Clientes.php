@@ -70,7 +70,7 @@ class Clientes extends Model {
         if ($ativos == false) {
             $clientes = $c->Selecionar('*', 'cliente');
         }else{
-            $clientes = $c->Selecionar('*', 'cliente', " where ativo = 1");
+            $clientes = $c->Selecionar('*', 'cliente', " where ativo = 1 order by nome asc");
         }
 
         return $clientes;
