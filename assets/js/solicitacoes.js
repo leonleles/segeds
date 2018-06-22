@@ -2,6 +2,7 @@ $(function () {
 
     var _construct = function () {
         listar();
+        filtro();
     };
 
     var popup = function () {
@@ -16,19 +17,21 @@ $(function () {
     };
 
 
-    var listar = function () {
+    var listar = function (dados) {
 
         $.ajax({
             type: 'POST',
             url: BASE_URL + 'ajaxSolicitacoes',
             data: {
-                acao: 'listartodos'
+                acao: 'listartodos',
+                dados: dados
             },
             dataType: 'json',
             async: false,
             success: function (retorno) {
+                console.log(retorno);
+                limparhtml();
                 if (retorno.length > 0) {
-                    limparhtml();
 
                     $.each(retorno, function (i, v) {
                         preencherHtml(v);
@@ -43,13 +46,13 @@ $(function () {
     var preencherHtml = function (v) {
 
         var html = '<tr><td><i class="' + v['status'] + '"></i></td>' +
-            '                <td>'+v['nome']+'</td>' +
+            '                <td>' + v['nome_cliente'] + '</td>' +
             '                <td>' + v['agendamento'] + '</td>' +
             '                <td>' + v['previsao'] + '</td>' +
             '                <td>' + v['nome_tecnico'] + '</td>' +
             '                <td style="width: 80px">' +
-            '                    <a href="'+BASE_URL+'solicitacao?id='+v['id_solicitacao']+'" target="_blank"><i class="fa fa-eye"></i></a>' +
-            '                    <i class="fa fa-cog opcoes" id="'+v['id_solicitacao']+'"></i>' +
+            '                    <a href="' + BASE_URL + 'solicitacao?id=' + v['id_solicitacao'] + '" target="_blank"><i class="fa fa-eye"></i></a>' +
+            '                    <i class="fa fa-cog opcoes" id="' + v['id_solicitacao'] + '"></i>' +
             '                </td></tr>';
 
 
@@ -60,6 +63,28 @@ $(function () {
     var limparhtml = function () {
 
         $("#solicitacoes_items").html("");
+
+    };
+
+    var filtro = function () {
+
+        $("#filtrar").click(function (e) {
+            e.preventDefault();
+
+            var dados = {};
+
+            dados.tecnico = $("#tecnicos").val();
+            dados.cliente = $("#clientes").val();
+            dados.servico = $("#servicos").val();
+            dados.status = $("#select_status").val();
+
+            if(dados.status == ""){
+                dados.status = null;
+            }
+
+            listar(dados);
+
+        });
 
     };
 

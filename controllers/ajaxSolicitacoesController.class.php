@@ -16,7 +16,13 @@ class ajaxSolicitacoesController extends Controller {
 
                 $s = new Solicitacoes();
 
-                $res = $s->listarTodos();
+                if(isset($dados)){
+                    $valores = $dados;
+                }else{
+                    $valores = [];
+                }
+
+                $res = $s->listarTodos($valores);
 
                 echo json_encode($res);
 

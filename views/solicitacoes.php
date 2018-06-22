@@ -15,7 +15,8 @@
         <form class="opcoes">
             <div class="item">
                 <p>Técnico: </p>
-                <select class="form-control" id="">
+                <select class="form-control" id="tecnicos">
+                    <option value="0">Todos</option>
                     <?php if (count($tecnicos) > 0) {
                         foreach ($tecnicos as $v) { ?>
                             <option value="<?= $v['id'] ?>"><?= $v['nome'] ?></option>
@@ -26,7 +27,8 @@
 
             <div class="item">
                 <p>Cliente: </p>
-                <select class="form-control" id="">
+                <select class="form-control" id="clientes">
+                    <option value="0">Todos</option>
                     <?php if (count($clientes) > 0) {
                         foreach ($clientes as $v) { ?>
                             <option value="<?= $v['id'] ?>"><?= $v['nome'] ?></option>
@@ -37,7 +39,8 @@
 
             <div class="item">
                 <p>Serviço: </p>
-                <select class="form-control" id="">
+                <select class="form-control" id="servicos">
+                    <option value="0">Todos</option>
                     <?php if (count($servicos) > 0) {
                         foreach ($servicos as $v) { ?>
                             <option value="<?= $v['id'] ?>"><?= $v['nome'] ?></option>
@@ -48,10 +51,12 @@
 
             <div class="item">
                 <p>Status: </p>
-                <select class="form-control" id="">
+                <select class="form-control" id="select_status">
+                    <option value="">Todos</option>
                     <option value="2">Aberto</option>
                     <option value="3">Em andamento</option>
-                    <option value="0">Cancelado ou atrasado</option>
+                    <option value="0">Cancelado</option>
+                    <option value="10">Atrasado</option>
                     <option value="1">Concluído</option>
                 </select>
             </div>
@@ -59,7 +64,7 @@
                 <i class="fa fa-search"></i> Filtrar
             </button>
 
-            <button type="reset" class="btn btn" id="filtrar">
+            <button type="reset" class="btn btn" id="reset">
                 <i class="fa fa-refresh"></i></button>
         </form>
     </fieldset>
