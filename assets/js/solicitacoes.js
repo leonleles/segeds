@@ -47,6 +47,13 @@ $(function () {
     };
 
     var preencherHtml = function (v) {
+        var link = "";
+
+        if (tipo_id > 4) {
+            link = "solicitacaoview";
+        } else {
+            link = "solicitacao";
+        }
 
         var html = '<tr><td><i class="' + v['status'] + '"></i></td>' +
             '                <td>' + v['nome_cliente'] + '</td>' +
@@ -54,7 +61,7 @@ $(function () {
             '                <td>' + v['previsao'] + '</td>' +
             '                <td>' + v['nome_tecnico'] + '</td>' +
             '                <td style="width: 80px">' +
-            '                    <a href="' + BASE_URL + 'solicitacao?id=' + v['id_solicitacao'] + '" target="_blank"><i class="fa fa-eye"></i></a>' +
+            '                    <a href="' + BASE_URL + link + '?id=' + v['id_solicitacao'] + '" target="_blank"><i class="fa fa-eye"></i></a>' +
             '                    <i class="fa fa-cog opcoes" id="' + v['id_solicitacao'] + '"></i>' +
             '                </td></tr>';
 
@@ -174,16 +181,14 @@ $(function () {
                         acao: 'alterarstatus',
                         dados: dados
                     },
-                    dataType: 'text',
+                    dataType: 'json',
                     async: true,
                     success: function (retorno) {
-                        if (retorno > 0) {
+                        console.log(retorno);
+                        if (retorno) {
                             alterar_status = true;
-                            alert("Salvo!");
+                            alert(retorno['msg']);
                             listar();
-                        } else {
-                            alterar_status = true;
-                            alert("Erro");
                         }
                     }
                 });

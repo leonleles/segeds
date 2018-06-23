@@ -11,7 +11,7 @@ class Agendamento extends Model {
         $c = new CRUD();
 
         date_default_timezone_set('America/Sao_Paulo');
-        $emissao = date('Y-m-d H:i');
+        $emissao = date('Y-m-d H:i:s');
 
         $items = "'{$emissao}','{$dados['agendamento']}', '{$dados['previsao']}', '{$dados['tecnico_id']}', '{$dados['ativo']}'";
 
@@ -37,16 +37,27 @@ class Agendamento extends Model {
     public function alterarstatus ($dados) {
 
         $c = new CRUD();
+        $fim = [];
 
-        $valores = "status = '{$dados['status']}'";
+        $agenda = $c->Selecionar("*", "agendamento", " where id={$dados['id']}")[0];
 
+        if(strtotime($agenda['agendamento']) < strtotime(date('Y-m-d H:i:s', strtotime("-15 minutes",strtotime(date('Y-m-d H:i:s')))))){
 
+            if($dados['status'] > 0){
+                $fim['msg'] = "É necessário reagendar para concluir essa ação.";
+            }else{
+                $valores = "status = '{$dados['status']}'";
+                $s = $c->Update("agendamento", $valores, " where id =".$dados['id']);
+                if($s > 0){
+                    $fim['msg'] = "Salvo.";
+                }
+            }
 
-        $res = $c->Update("agendamento", $valores, " where id =".$dados['id']);
+        }else{
+            $fim['msg'] = "else";
+        }
 
-
-
-        return $res;
+        return $fim;
 
     }
 }

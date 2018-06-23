@@ -22,6 +22,8 @@ define("DOMAIN", "//" . $_SERVER['SERVER_NAME'] . $port . "/");
 // URL real atual
 define("URL", "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 
+date_default_timezone_set("America/Sao_Paulo");
+
 if (ENVIRONMENT == 'development') {
 
     $config['dbname'] = 'segeds';

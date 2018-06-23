@@ -314,6 +314,7 @@
         <script type="text/javascript" src="<?= BASE_URL . $js ?>"></script>
     <?php endforeach; ?>
     <script type="text/javascript">var BASE_URL = "<?php echo BASE_URL; ?>";</script>
+    <script type="text/javascript">var tipo_id = "<?php echo $_SESSION['tipo_id']; ?>";</script>
 </div>
 </body>
 
