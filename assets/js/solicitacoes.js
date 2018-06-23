@@ -101,7 +101,6 @@ $(function () {
             dataType: 'json',
             async: false,
             success: function (retorno) {
-                console.log(retorno);
                 var elemento = $(".popup .container .conteudo fieldset .dados");
 
                 var html = "<input type='hidden' id='id_agendamentopopup' value='"+retorno.id_agendamento+"'>";
@@ -157,7 +156,29 @@ $(function () {
 
        $("#alterarstatus").click(function () {
 
-           alert($("#id_agendamentopopup").val());
+           var dados = {};
+           dados.id = $("#id_agendamentopopup").val();
+           dados.status = $("#statuspopup").val();
+
+           $.ajax({
+               type: 'POST',
+               url: BASE_URL + 'ajaxSolicitacoes',
+               data: {
+                   acao: 'alterarstatus',
+                   dados: dados
+               },
+               dataType: 'text',
+               async: false,
+               success: function (retorno) {
+                   if(retorno > 0){
+                       alert("Salvo!");
+                       listar();
+                   }else{
+                       alert("Erro");
+                   }
+               }
+           });
+
 
        });
 

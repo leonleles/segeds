@@ -16,9 +16,9 @@ class ajaxSolicitacoesController extends Controller {
 
                 $s = new Solicitacoes();
 
-                if(isset($dados)){
+                if (isset($dados)) {
                     $valores = $dados;
-                }else{
+                } else {
                     $valores = [];
                 }
 
@@ -33,6 +33,16 @@ class ajaxSolicitacoesController extends Controller {
                 $s = new Solicitacoes();
 
                 $res = $s->verDados($dados['id']);
+
+                echo json_encode($res);
+
+                break;
+
+            case "alterarstatus":
+
+                $a = new Agendamento();
+
+                $res = $a->alterarstatus($dados);
 
                 echo json_encode($res);
 

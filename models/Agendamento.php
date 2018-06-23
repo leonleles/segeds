@@ -33,8 +33,16 @@ class Agendamento extends Model {
 
     }
 
-    public function listar () {
+    //altera o status apartir do id enviado pelo popup
+    public function alterarstatus ($dados) {
 
+        $c = new CRUD();
+
+        $valores = "status = '{$dados['status']}'";
+
+        $res = $c->Update("agendamento", $valores, " where id =".$dados['id']);
+
+        return $res;
 
     }
 }
