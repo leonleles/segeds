@@ -183,7 +183,7 @@ class Solicitacoes extends Model {
                 } else if ($v['status'] == 0) {
                     $v['status'] = 'cancelado';
                 } else if ($v['status'] == 2) {
-                    if ((int) strtotime($v['agendamento']) < (int) strtotime(date("Y-m-d H:i:s"))) {
+                    if ((int)strtotime($v['agendamento']) < (int)strtotime(date("Y-m-d H:i:s"))) {
                         $v['status'] = "atrasado";
                     } else {
                         $v['status'] = 'aberto';
@@ -201,6 +201,37 @@ class Solicitacoes extends Model {
         }
 
         return $final;
+    }
 
+    //pega o id da solicitação e lista os dados no popup de solicitações
+
+    public function verDados ($id) {
+
+        $c = new CRUD();
+
+        $res = $c->Query("SELECT
+	                      *,
+	                      m.nome AS municipio,
+	                      c.nome AS nome_cliente,
+	                      d.nome AS distrito,
+	                      a.id as id_agendamento
+                      FROM
+	                      solicitacao
+	                  LEFT JOIN cliente c ON solicitacao.cliente_id = c.id
+	                  LEFT JOIN endereco e ON c.endereco_id = e.id
+	                  LEFT JOIN municipio m ON e.municipio_id = m.id
+	                  LEFT JOIN distrito d ON e.distrito_id = d.id
+	                  LEFT JOIN agendamento a ON solicitacao.agendamento_id = a.id 
+                      WHERE
+	                  solicitacao.id = {$id}
+	                  
+	                  LIMIT 1
+");
+
+        if(count($res) > 0){
+            $res = $res[0];
+        }
+
+        return $res;
     }
 }

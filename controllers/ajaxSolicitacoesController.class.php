@@ -27,6 +27,16 @@ class ajaxSolicitacoesController extends Controller {
                 echo json_encode($res);
 
                 break;
+
+            case "verdados":
+
+                $s = new Solicitacoes();
+
+                $res = $s->verDados($dados['id']);
+
+                echo json_encode($res);
+
+                break;
         }
 
     }
