@@ -39,6 +39,14 @@ $(function () {
                 }
             }
         });
+
+        if ($("#id").val() == null) {
+            if (dados.agendamento < $("#dataatual").val()) {
+                verificacao_horario = 'false';
+                alert("Agendamento não pode ser menor que horário atual.");
+            }
+        }
+
     };
 
     var verificarCliente = function () {
@@ -117,9 +125,9 @@ $(function () {
         var agendamento = $("#agendamento").find("input[type=date]").val() + " " + $("#agendamento").find("input[type=time]").val();
         var previsao = $("#previsao").find("input[type=date]").val() + " " + $("#previsao").find("input[type=time]").val();
 
-        if(agendamento != previsao && previsao > agendamento){
+        if (agendamento != previsao && previsao > agendamento) {
             verificacao_data = 'true';
-        }else{
+        } else {
             verificacao_data = 'false';
             alert("Previsão deve ser maior que agendamento!");
         }

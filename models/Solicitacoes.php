@@ -203,11 +203,4 @@ class Solicitacoes extends Model {
         return $final;
 
     }
-
-    public function selecionarSolicitacao () {
-
-        $c = new CRUD();
-
-
-    }
 }

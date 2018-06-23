@@ -18,6 +18,7 @@
 
         <td>
             <input type="hidden" id="id" value="<?= $solicitacao['id'] ?>">
+            <input type="hidden" id="dataatual" value="<?= date("Y-m-d H:i:s") ?>">
             <input type="hidden" id="id_agendamento" value="<?= $solicitacao['id_agendamento'] ?>">
 
             <form id="formulario">
