@@ -150,7 +150,11 @@ class Solicitacoes extends Model {
 
         $c = new CRUD();
 
-        $condicao = " where s.ativo = 1 ";
+        if ($_SESSION['tipo_id'] > 4) {
+            $condicao = " where s.ativo = 1 and a.tecnico_id = {$_SESSION['id']} ";
+        } else {
+            $condicao = " where s.id > 0 ";
+        }
 
         if (isset($dados['tecnico']) && $dados['tecnico'] != 0 && $dados['tecnico'] != null) {
             $condicao .= " and a.tecnico_id = {$dados['tecnico']}";

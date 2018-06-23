@@ -40,7 +40,11 @@ class Agendamento extends Model {
 
         $valores = "status = '{$dados['status']}'";
 
+
+
         $res = $c->Update("agendamento", $valores, " where id =".$dados['id']);
+
+
 
         return $res;
 
