@@ -228,7 +228,7 @@ class Solicitacoes extends Model {
 	                  LIMIT 1
 ");
 
-        if(count($res) > 0){
+        if (count($res) > 0) {
             $res = $res[0];
         }
 

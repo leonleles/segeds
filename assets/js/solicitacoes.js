@@ -1,5 +1,7 @@
 $(function () {
 
+    var alterar_status = true;
+
     var _construct = function () {
         listar();
         filtro();
@@ -103,50 +105,51 @@ $(function () {
             success: function (retorno) {
                 var elemento = $(".popup .container .conteudo fieldset .dados");
 
-                var html = "<input type='hidden' id='id_agendamentopopup' value='"+retorno.id_agendamento+"'>";
+                var html = "<input type='hidden' id='id_agendamentopopup' value='" + retorno.id_agendamento + "'>";
 
-                if(retorno.nome_cliente){
-                    html += "<div class='item'><b>Nome:</b> "+retorno.nome_cliente+"</div>";
+                if (retorno.nome_cliente) {
+                    html += "<div class='item'><b>Nome:</b> " + retorno.nome_cliente + "</div>";
                 }
 
-                if(retorno.telefone){
-                    html += "<div class='item'><b>Telefone:</b> "+retorno.telefone+"</div>";
+                if (retorno.telefone) {
+                    html += "<div class='item'><b>Telefone:</b> " + retorno.telefone + "</div>";
                 }
 
-                if(retorno.cpf_cnpj){
-                    html += "<div class='item'><b>CPF/CNPJ:</b> "+retorno.cpf_cnpj+"</div>";
+                if (retorno.cpf_cnpj) {
+                    html += "<div class='item'><b>CPF/CNPJ:</b> " + retorno.cpf_cnpj + "</div>";
                 }
 
-                if(retorno.cpf){
-                    html += "<div class='item'><b>CPF/CNPJ:</b> "+retorno.cpf+"</div>";
+                if (retorno.cpf) {
+                    html += "<div class='item'><b>CPF/CNPJ:</b> " + retorno.cpf + "</div>";
                 }
 
-                if(retorno.municipio){
-                    html += "<div class='item'><b>Município:</b> "+retorno.municipio+"</div>";
+                if (retorno.municipio) {
+                    html += "<div class='item'><b>Município:</b> " + retorno.municipio + "</div>";
                 }
 
-                if(retorno.distrito){
-                    html += "<div class='item'><b>Distrito:</b> "+retorno.distrito+"</div>";
+                if (retorno.distrito) {
+                    html += "<div class='item'><b>Distrito:</b> " + retorno.distrito + "</div>";
                 }
 
-                if(retorno.bairro){
-                    html += "<div class='item'><b>Bairro:</b> "+retorno.bairro+"</div>";
+                if (retorno.bairro) {
+                    html += "<div class='item'><b>Bairro:</b> " + retorno.bairro + "</div>";
                 }
 
-                if(retorno.rua){
-                    html += "<div class='item'><b>Rua:</b> "+retorno.rua+"</div>";
+                if (retorno.rua) {
+                    html += "<div class='item'><b>Rua:</b> " + retorno.rua + "</div>";
                 }
 
-                if(retorno.numero){
-                    html += "<div class='item'><b>Número:</b> "+retorno.numero+"</div>";
+                if (retorno.numero) {
+                    html += "<div class='item'><b>Número:</b> " + retorno.numero + "</div>";
                 }
 
-                if(retorno.complemento){
-                    html += "<div class='item'><b>Complemento:</b> "+retorno.complemento+"</div>";
+                if (retorno.complemento) {
+                    html += "<div class='item'><b>Complemento:</b> " + retorno.complemento + "</div>";
                 }
 
                 elemento.html(html);
                 $("#statuspopup").val(retorno.status);
+
                 alterarstatus();
             }
         });
@@ -154,33 +157,38 @@ $(function () {
 
     var alterarstatus = function () {
 
-       $("#alterarstatus").click(function () {
+        $("#alterarstatus").click(function () {
 
-           var dados = {};
-           dados.id = $("#id_agendamentopopup").val();
-           dados.status = $("#statuspopup").val();
+            var dados = {};
+            dados.id = $(".popup .container .conteudo fieldset .dados").find("#id_agendamentopopup").val();
+            dados.status = $(".popup .container .conteudo").find("#statuspopup").val();
 
-           $.ajax({
-               type: 'POST',
-               url: BASE_URL + 'ajaxSolicitacoes',
-               data: {
-                   acao: 'alterarstatus',
-                   dados: dados
-               },
-               dataType: 'text',
-               async: false,
-               success: function (retorno) {
-                   if(retorno > 0){
-                       alert("Salvo!");
-                       listar();
-                   }else{
-                       alert("Erro");
-                   }
-               }
-           });
+            if (alterar_status != false) {
 
+                alterar_status = false;
 
-       });
+                $.ajax({
+                    type: 'POST',
+                    url: BASE_URL + 'ajaxSolicitacoes',
+                    data: {
+                        acao: 'alterarstatus',
+                        dados: dados
+                    },
+                    dataType: 'text',
+                    async: true,
+                    success: function (retorno) {
+                        if (retorno > 0) {
+                            alterar_status = true;
+                            alert("Salvo!");
+                            listar();
+                        } else {
+                            alterar_status = true;
+                            alert("Erro");
+                        }
+                    }
+                });
+            }
+        });
 
     };
 
