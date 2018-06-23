@@ -166,7 +166,7 @@ class Solicitacoes extends Model {
 
         if (isset($dados['status']) && $dados['status'] != null) {
             if ($dados['status'] > 9) {
-                $condicao .= " and NOW() > a.agendamento";
+                $condicao .= " and NOW() > a.agendamento and a.status = 2 ";
             } else {
                 $condicao .= " and a.status = {$dados['status']}";
             }
