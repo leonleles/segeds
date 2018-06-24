@@ -41,6 +41,8 @@ $(function () {
                     });
 
                     popup();
+                } else {
+                    alert("Nenhum resultado.");
                 }
             }
         });

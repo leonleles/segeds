@@ -94,17 +94,6 @@
             </tr>
             </thead>
             <tbody id="solicitacoes_items">
-            <tr>
-                <td><i class="andamento"></i></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td style="width: 80px">
-                    <i class="fa fa-eye"></i>
-                    <i class="fa fa-cog opcoes"></i>
-                </td>
-            </tr>
             </tbody>
         </table>
     </div>
