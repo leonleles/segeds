@@ -27,7 +27,7 @@ class Agendamento extends Model {
 
         $valores = "agendamento = '{$dados['agendamento']}', previsao = '{$dados['previsao']}', tecnico_id= '{$dados['tecnico_id']}', ativo = '{$dados['ativo']}'";
 
-        $res = $c->Update('agendamento', $valores, " where id = ".$dados['id_agendamento']);
+        $res = $c->Update('agendamento', $valores, " where id = " . $dados['id_agendamento']);
 
         return $res;
 
@@ -39,23 +39,12 @@ class Agendamento extends Model {
         $c = new CRUD();
         $fim = [];
 
-        $agenda = $c->Selecionar("*", "agendamento", " where id={$dados['id']}")[0];
-
-        if(strtotime($agenda['agendamento']) < strtotime(date('Y-m-d H:i:s', strtotime("-15 minutes",strtotime(date('Y-m-d H:i:s')))))){
-
-            if($dados['status'] > 0){
-                $fim['msg'] = "É necessário reagendar para concluir essa ação.";
-            }else{
-                $valores = "status = '{$dados['status']}'";
-                $s = $c->Update("agendamento", $valores, " where id =".$dados['id']);
-                if($s > 0){
-                    $fim['msg'] = "Salvo.";
-                }
-            }
-
-        }else{
-            $fim['msg'] = "else";
+        $valores = "status = '{$dados['status']}'";
+        $s = $c->Update("agendamento", $valores, " where id =" . $dados['id']);
+        if ($s > 0) {
+            $fim['msg'] = "Salvo.";
         }
+
 
         return $fim;
 

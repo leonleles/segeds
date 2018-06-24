@@ -46,29 +46,6 @@ $(function () {
 
     };
 
-
-    var senhaatual = function () {
-
-        var dados = {};
-
-        dados.senha = $("#senhaatual").val().trim();
-
-        $.ajax({
-            type: 'POST',
-            url: BASE_URL + 'ajaxUsuario',
-            data: {
-                acao: 'senhaatual',
-                dados: dados
-            },
-            dataType: 'text',
-            async: false,
-            success: function (retorno) {
-                senha_atual = retorno
-            }
-        });
-
-    };
-
     var salvar = function () {
 
         $("#formulario").on('submit', function (e) {
@@ -82,52 +59,32 @@ $(function () {
                 var tipo = $('#tipo').val();
                 var id = $("#id").val();
                 var ativo = $("#ativo").val();
-
-                senhaok = null;
-
-                console.log(validacao);
-
-                if (validacao != false) {
-
-                    if ($("#senha").val().trim() != null && $("#senha").val().trim() != "" && $("#senhaconfirm").val().trim() != null && $("#senhaconfirm").val().trim() != "") {
-                        senhaatual();
-                        if (senha_atual != false) {
-                            senhaok = $("#senha").val().trim();
-                        } else {
-                            $("#msgsenha3").fadeIn(300);
-                        }
-                    }
-                }
+                var senhaatual = $("#senhaatual").val();
 
                 var dados = {
                     nome: nome,
                     login: login,
+                    senhaatual: senhaatual,
                     senha: senhaok,
                     tipo_id: tipo,
                     ativo: ativo,
                     id: id
                 };
 
-                // $.ajax({
-                //     type: 'POST',
-                //     url: BASE_URL + 'ajaxUsuario',
-                //     data: {
-                //         acao: 'salvarperfil',
-                //         dados: dados
-                //     },
-                //     dataType: 'json',
-                //     async: false,
-                //     success: function (retorno) {
-                //         alert(retorno.msg);
-                //
-                //         if (retorno.id > 0) {
-                //             window.location.href = BASE_URL + 'usuarioedit?id=' + retorno.id;
-                //         } else {
-                //             window.location.reload();
-                //         }
-                //
-                //     }
-                // });
+                $.ajax({
+                    type: 'POST',
+                    url: BASE_URL + 'ajaxUsuario',
+                    data: {
+                        acao: 'salvarperfil',
+                        dados: dados
+                    },
+                    dataType: 'json',
+                    async: false,
+                    success: function (retorno) {
+                        alert(retorno.msg);
+                        window.location.reload();
+                    }
+                });
             }
         );
     };

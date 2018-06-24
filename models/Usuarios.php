@@ -103,18 +103,45 @@ class Usuarios extends Model {
 
         } else {
 
-            $valores = "nome = '{$dados['nome']}', login ='{$dados['login']}', tipo_id ='{$dados['tipo_id']}', ativo='{$dados['ativo']}'";
+            if ($dados['senhaatual']) {
 
-            if($dados['senha']){
-                $valores .= ", senha ='{$dados['senha']}'";
-            }
+                $versenha = $c->Selecionar("*", "usuario", " where senha = {$dados['senhaatual']} and id={$dados['id']}");
 
-            $id = $c->Update('usuario', $valores, " WHERE id = {$dados['id']}");
+                if (count($versenha) > 0) {
 
-            if ($id > 0) {
-                $res['msg'] = 'Salvo!';
+                    $valores = "nome = '{$dados['nome']}', login ='{$dados['login']}', ativo='{$dados['ativo']}'";
+
+                    if ($dados['senha'] != null) {
+                        $valores .= ", senha ='{$dados['senha']}'";
+
+                        $id = $c->Update('usuario', $valores, " WHERE id = {$dados['id']}");
+
+                        if ($id > 0) {
+                            $res['msg'] = 'Salvo!';
+                        } else {
+                            $res['msg'] = 'Altere o registro para salvar!';
+                        }
+
+                    } else {
+                        $res['msg'] = "Digite a senha nova.";
+                    }
+
+
+                } else {
+                    $res['msg'] = "Senha atual incorreta.";
+                }
+
             } else {
-                $res['msg'] = 'Altere o registro para salvar!';
+
+                $valores = "nome = '{$dados['nome']}', login ='{$dados['login']}', ativo='{$dados['ativo']}'";
+
+                $id = $c->Update('usuario', $valores, " WHERE id = {$dados['id']}");
+
+                if ($id > 0) {
+                    $res['msg'] = 'Salvo!';
+                } else {
+                    $res['msg'] = 'Altere o registro para salvar!';
+                }
             }
         }
 
