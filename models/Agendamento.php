@@ -39,10 +39,27 @@ class Agendamento extends Model {
         $c = new CRUD();
         $fim = [];
 
-        $valores = "status = '{$dados['status']}'";
-        $s = $c->Update("agendamento", $valores, " where id =" . $dados['id']);
-        if ($s > 0) {
-            $fim['msg'] = "Salvo.";
+        if ($_SESSION['tipo_id'] > 4) {
+
+            $verifica = $c->Selecionar("*", "agendamento", " where status = 3 and tecnico_id = {$_SESSION['id']}");
+
+            if(count($verifica) > 0 and $dados['status'] == 3){
+                $fim['msg'] = "Não é possível concluir essa ação. Uma solicitação encontra-se em andamento.";
+            }else{
+                $valores = "status = '{$dados['status']}'";
+                $s = $c->Update("agendamento", $valores, " where id =" . $dados['id']);
+                if ($s > 0) {
+                    $fim['msg'] = "Salvo.";
+                }
+            }
+
+        } else {
+
+            $valores = "status = '{$dados['status']}'";
+            $s = $c->Update("agendamento", $valores, " where id =" . $dados['id']);
+            if ($s > 0) {
+                $fim['msg'] = "Salvo.";
+            }
         }
 
 
