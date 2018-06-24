@@ -26,6 +26,8 @@ class solicitacaoController extends Controller {
         $dados['solicitacao']['data_previsao'] = null;
         $dados['solicitacao']['hora_previsao'] = null;
         $dados['solicitacao']['status'] = null;
+        $dados['solicitacao']['conclusao'] = null;
+        $dados['solicitacao']['usuario_id'] = null;
 
         if (isset($_GET['id']) && $_GET['id'] != null) {
             $dados['solicitacao'] = $so->selecionarId($_GET['id'])[0];
@@ -45,6 +47,8 @@ class solicitacaoController extends Controller {
             } else if ($dados['solicitacao']['status'] == 3) {
                 $dados['solicitacao']['status'] = 'Andamento';
             }
+
+            $dados['solicitacao']['usuario_id'] = $user->selecionarId($dados['solicitacao']['usuario_id'])['nome'];
 
             $dados['solicitacao']['data'] = date("Y-m-d", strtotime($dados['solicitacao']['agendamento']));
             $dados['solicitacao']['hora'] = date("H:i", strtotime($dados['solicitacao']['agendamento']));

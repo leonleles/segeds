@@ -26,9 +26,9 @@ class Solicitacoes extends Model {
 
             $agendamento = $a->salvar($dados);
 
-            $items = "'{$dados['cliente_id']}','{$agendamento}', '{$dados['servico_id']}', '{$dados['ativo']}'";
+            $items = "'{$dados['cliente_id']}','{$agendamento}', '{$dados['servico_id']}', '{$dados['ativo']}', '{$_SESSION['id']}'";
 
-            $id = $c->Salvar('solicitacao', 'cliente_id, agendamento_id, servico_id, ativo', $items);
+            $id = $c->Salvar('solicitacao', 'cliente_id, agendamento_id, servico_id, ativo, usuario_id', $items);
 
             if ($id > 0) {
                 $res['id'] = $id;
@@ -52,6 +52,7 @@ class Solicitacoes extends Model {
         $sql = "select s.id,
           s.cliente_id,
           s.servico_id,
+          s.usuario_id,
           s.ativo,
           a.emissao, 
           a.conclusao, 

@@ -50,7 +50,8 @@ class Agendamento extends Model {
                     $data = date("Y-m-d H:i:s");
                     $valores = "status = '{$dados['status']}', conclusao = '{$data}'";
                 } else {
-                    $valores = "status = '{$dados['status']}'";
+                    $data = null;
+                    $valores = "status = '{$dados['status']}', conclusao = '{$data}'";
                 }
 
                 $s = $c->Update("agendamento", $valores, " where id =" . $dados['id']);
@@ -64,7 +65,8 @@ class Agendamento extends Model {
                 $data = date("Y-m-d H:i:s");
                 $valores = "status = '{$dados['status']}', conclusao = '{$data}'";
             } else {
-                $valores = "status = '{$dados['status']}'";
+                $data = null;
+                $valores = "status = '{$dados['status']}', conclusao = '{$data}'";
             }
 
 

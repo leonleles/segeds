@@ -79,6 +79,16 @@
                     <div class="form-control"><?= $solicitacao['status'] ?></div>
                     <?php } ?>
 
+                    <?php if($solicitacao['conclusao']){?>
+                    <label>Conclusão:</label>
+                    <div class="form-control"><?= date("d/m/Y H:i:s", strtotime($solicitacao['conclusao'])) ?></div>
+                    <?php } ?>
+
+                    <?php if($solicitacao['usuario_id']){?>
+                    <label>Emitido por:</label>
+                    <div class="form-control"><?= $solicitacao['usuario_id'] ?></div>
+                    <?php } ?>
+
                 </fieldset>
 
                 <div class="form-group" style="margin-top: 30px">

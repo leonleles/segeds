@@ -187,4 +187,19 @@ class Usuarios extends Model {
         return $res;
 
     }
+
+    public function selecionarId ($id) {
+
+        $c = new CRUD();
+
+        $res = $c->Selecionar('*', 'usuario', " WHERE id = {$id}");
+
+        if(count($res) > 0){
+            $res = $res[0];
+        }else{
+            $res;
+        }
+
+        return $res;
+    }
 }

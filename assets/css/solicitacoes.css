@@ -87,7 +87,7 @@
     color: #ff001c;
 }
 
-.tabela .legenda .item .cancelado {
+.tabela .resultados table tr td:first-child .cancelado {
     border: none;
     background-color: #ff001c;
 }

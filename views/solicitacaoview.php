@@ -79,6 +79,16 @@
                         <input class="form-control" value="<?= $solicitacao['status'] ?>" disabled>
                     <?php } ?>
 
+                    <?php if($solicitacao['conclusao']){?>
+                        <label>Conclusão:</label>
+                        <input class="form-control" value="<?= date("d/m/Y H:i:s", strtotime($solicitacao['conclusao'])) ?>" disabled>
+                    <?php } ?>
+
+                    <?php if($solicitacao['usuario_id']){?>
+                        <label>Emitido por:</label>
+                        <input class="form-control" value="<?= $solicitacao['usuario_id'] ?>" disabled>
+                    <?php } ?>
+
 
                 </fieldset>
 
