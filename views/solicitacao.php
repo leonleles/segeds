@@ -74,7 +74,10 @@
                     </select>
 
                     <span class="mensagem" id="msghorario"></span>
-
+                    <?php if($solicitacao['status']){?>
+                    <label>Status:</label>
+                    <div class="form-control"><?= $solicitacao['status'] ?></div>
+                    <?php } ?>
 
                 </fieldset>
 

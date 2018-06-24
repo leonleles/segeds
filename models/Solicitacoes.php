@@ -59,7 +59,8 @@ class Solicitacoes extends Model {
           a.previsao,
           a.tecnico_id, 
           a.id as id_agendamento, 
-          a.ativo as ativo_agendamento 
+          a.ativo as ativo_agendamento,
+          a.status 
           from solicitacao s 
           left join agendamento a on s.agendamento_id = a.id 
           where s.id =";

@@ -43,10 +43,16 @@ class Agendamento extends Model {
 
             $verifica = $c->Selecionar("*", "agendamento", " where status = 3 and tecnico_id = {$_SESSION['id']}");
 
-            if(count($verifica) > 0 and $dados['status'] == 3){
+            if (count($verifica) > 0 and $dados['status'] == 3) {
                 $fim['msg'] = "Não é possível concluir essa ação. Uma solicitação encontra-se em andamento.";
-            }else{
-                $valores = "status = '{$dados['status']}'";
+            } else {
+                if ($dados['status'] == 1) {
+                    $data = date("Y-m-d H:i:s");
+                    $valores = "status = '{$dados['status']}', conclusao = '{$data}'";
+                } else {
+                    $valores = "status = '{$dados['status']}'";
+                }
+
                 $s = $c->Update("agendamento", $valores, " where id =" . $dados['id']);
                 if ($s > 0) {
                     $fim['msg'] = "Salvo.";
@@ -54,8 +60,14 @@ class Agendamento extends Model {
             }
 
         } else {
+            if ($dados['status'] == 1) {
+                $data = date("Y-m-d H:i:s");
+                $valores = "status = '{$dados['status']}', conclusao = '{$data}'";
+            } else {
+                $valores = "status = '{$dados['status']}'";
+            }
 
-            $valores = "status = '{$dados['status']}'";
+
             $s = $c->Update("agendamento", $valores, " where id =" . $dados['id']);
             if ($s > 0) {
                 $fim['msg'] = "Salvo.";

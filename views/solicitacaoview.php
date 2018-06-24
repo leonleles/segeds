@@ -74,6 +74,11 @@
 
                     <span class="mensagem" id="msghorario"></span>
 
+                    <?php if($solicitacao['status']){?>
+                        <label>Status:</label>
+                        <input class="form-control" value="<?= $solicitacao['status'] ?>" disabled>
+                    <?php } ?>
+
 
                 </fieldset>
 

@@ -25,15 +25,33 @@ class solicitacaoController extends Controller {
         $dados['solicitacao']['hora'] = null;
         $dados['solicitacao']['data_previsao'] = null;
         $dados['solicitacao']['hora_previsao'] = null;
+        $dados['solicitacao']['status'] = null;
 
         if (isset($_GET['id']) && $_GET['id'] != null) {
             $dados['solicitacao'] = $so->selecionarId($_GET['id'])[0];
             //dados de agendamento
+
+            if ($dados['solicitacao']['status'] == 1) {
+                $dados['solicitacao']['status'] = 'Concluido';
+            } else if ($dados['solicitacao']['status'] == 0) {
+                $dados['solicitacao']['status'] = 'Cancelado';
+            } else if ($dados['solicitacao']['status'] == 2) {
+                if ((int)strtotime($dados['solicitacao']['agendamento']) < (int)strtotime(date("Y-m-d H:i:s"))) {
+                    $dados['solicitacao']['status'] = "Atrasado";
+                } else {
+                    $dados['solicitacao']['status'] = 'Aberto';
+                }
+
+            } else if ($dados['solicitacao']['status'] == 3) {
+                $dados['solicitacao']['status'] = 'Andamento';
+            }
+
             $dados['solicitacao']['data'] = date("Y-m-d", strtotime($dados['solicitacao']['agendamento']));
             $dados['solicitacao']['hora'] = date("H:i", strtotime($dados['solicitacao']['agendamento']));
             //dados de previsao
             $dados['solicitacao']['data_previsao'] = date("Y-m-d", strtotime($dados['solicitacao']['previsao']));
             $dados['solicitacao']['hora_previsao'] = date("H:i", strtotime($dados['solicitacao']['previsao']));
+
         }
 
         $dados['clientes'] = $c->Listar(true);
