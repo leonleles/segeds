@@ -52,7 +52,7 @@
             <button type="submit" style="margin-top: 30px;" class="btn btn-success save-user" id="save-user"><i
                         class="fa fa-save"></i> Salvar
             </button>
-            <a class="btn btn-default" href="<?= BASE_URL ?>usuariolist" style="margin: 30px 0 0 10px"><i
+            <a class="btn btn-default" href="<?= BASE_URL ?>solicitacoes" style="margin: 30px 0 0 10px"><i
                         class="fa fa-reply"></i> Voltar</a>
 
         </td>
