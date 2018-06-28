@@ -16,12 +16,16 @@ class Notificacoes extends Model {
 	            LEFT JOIN solicitacao s ON s.agendamento_id = agendamento.id
 	            LEFT JOIN cliente c ON s.cliente_id = c.id 
                 WHERE
-	            agendamento.tecnico_id = {$_SESSION['id']}  and agendamento.status = 2";
+	            agendamento.status = 2";
 
         if($id != null){
             $condicao = " and agendamento.id > {$id} ";
         }else{
             $condicao = "";
+        }
+
+        if($_SESSION['tipo_id'] > 4){
+             $condicao .= " and agendamento.tecnico_id = {$_SESSION['id']} ";
         }
 
         $res = $c->Query($sql.$condicao." ORDER BY agendamento.id");
