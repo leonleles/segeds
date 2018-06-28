@@ -52,4 +52,31 @@ class Notificacoes extends Model {
         return $id;
 
     }
+
+    public function notifica($id){
+
+        $c = new CRUD();
+
+        $sql = "
+                SELECT
+	n.*,
+	a.emissao,
+	s.id as id_solicitacao
+FROM
+	notificacoes n
+	LEFT JOIN agendamento a ON a.id = n.agendamento_id 
+	LEFT JOIN solicitacao s on s.agendamento_id = a.id
+	             ";
+
+        if($id != null){
+            $condicao = " where n.id > {$id} ";
+        }else{
+            $condicao = "";
+        }
+
+        $res = $c->Query($sql.$condicao." ORDER BY n.id");
+
+        return $res;
+
+    }
 }

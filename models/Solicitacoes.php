@@ -37,7 +37,7 @@ class Solicitacoes extends Model {
                 $c = new Clientes();
                 $nomecliente = $c->selecionarId($dados['cliente_id'])[0]['nome'];
                 $n->inserir([
-                    "mensagem"=> "nova solicitação de ".$nomecliente,
+                    "mensagem"=> "Nova solicitação de ".$nomecliente,
                     "user"=> $dados['tecnico_id'],
                     "agendamento_id" => $agendamento]);
             }

@@ -1,15 +1,18 @@
 $(function () {
 
     var id_notificacao = null;
+    var id_notificacoes = null;
 
     var _construct = function () {
         logout();
         notificacoes();
         removericon();
         setInterval(function () {
-            console.log("chamando de novo");
             notificacoes();
-        }, 100000);
+        }, 5000);
+        setInterval(function () {
+            notificacoes();
+        }, 10000);
     };
 
 
@@ -60,6 +63,30 @@ $(function () {
         })
     };
 
+    var notificar = function () {
+
+        $.ajax({
+            type: 'POST',
+            url: BASE_URL + 'ajaxNotificacoes',
+            data: {
+                acao: 'notifica',
+                dados: {id: id_notificacoes}
+            },
+            dataType: 'json',
+            async: true,
+            success: function (retorno) {
+                console.log(retorno);
+                if (retorno.length > 0) {
+                    $("#circulo_notificacoes").show();
+                    id_notificacoes = retorno[retorno.length - 1]['id_agendamento'];
+                    $.each(retorno, function (i, v) {
+                        preencherhtmlNotificacao2(v);
+                    });
+                }
+            }
+        })
+    };
+
     var preencherhtmlNotificacao = function (v) {
 
         var html = '<a class="dropdown-item" href="' + BASE_URL + 'solicitacaoview?id=' + v['id_solicitacao'] + '" target="_blank">' +
@@ -75,8 +102,27 @@ $(function () {
 
     };
 
+    var preencherhtmlNotificacao2 = function (v) {
+
+        var html = '<a class="dropdown-item" href="' + BASE_URL + 'solicitacaoview?id=' + v['id_solicitacao'] + '" target="_blank">' +
+            '           <span class="text-info">' +
+            '                <strong>' + v['mensagem'] + '</strong>' +
+            '           </span>' +
+            '           <span class="small float-right text-muted">' + v['emissao'] + '</span>' +
+            '              <div class="dropdown-message small">' +
+            '           </div>' +
+            '        </a>';
+
+        setHtml(html);
+
+    };
+
     var setHtml = function (html) {
-        $("#notificacoes").html(html);
+        $("#notificacoes").append(html);
+    };
+
+    var limparHtml = function(){
+        $("#notificacoes").html("");
     };
 
     var removericon = function () {

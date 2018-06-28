@@ -21,6 +21,16 @@ class ajaxNotificacoesController extends Controller {
                 echo json_encode($res);
 
                 break;
+
+            case 'notifica':
+
+                $n = new Notificacoes();
+
+                $res = $n->notifica($dados['id']);
+
+                echo json_encode($res);
+
+                break;
         }
 
     }
