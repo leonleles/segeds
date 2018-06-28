@@ -35,7 +35,7 @@ class Controller {
 
     public function verificaLogin () {
         if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('Location: ' . BASE_URL . 'home');
+            header('Location: ' . BASE_URL . 'solicitacoes');
             exit;
         }
     }

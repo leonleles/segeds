@@ -32,7 +32,7 @@ $(function () {
             success: function (retorno) {
                 if (retorno > 0) {
                     verificacao_horario = 'false';
-                    $("#msghorario").fadeIn(300).html("Horário insdisponível para este técnico. Verifique suas solicitações <a href='" + BASE_URL + "home'>aqui.</a>");
+                    $("#msghorario").fadeIn(300).html("Horário insdisponível para este técnico. Verifique suas solicitações <a target='_blank' href='" + BASE_URL + "solicitacoes'>aqui.</a>");
                 } else {
                     verificacao_horario = 'true';
                     $("#msghorario").fadeOut(300).html("");
@@ -97,7 +97,7 @@ $(function () {
             dados.ativo = 0;
         }
 
-        if (verificacao_cliente != 'false' && verificacao_horario != 'false' && verificacao_data != 'false') {
+        if (verificacao_cliente != false && verificacao_horario != 'false' && verificacao_data != 'false') {
 
             $.ajax({
                 type: 'POST',

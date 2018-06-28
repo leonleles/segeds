@@ -6,6 +6,7 @@ class Solicitacoes extends Model {
 
         $c = new CRUD();
         $a = new Agendamento();
+        $n = new Notificacoes();
         $res = [];
 
         if ($dados['id'] != null) {
@@ -33,6 +34,12 @@ class Solicitacoes extends Model {
             if ($id > 0) {
                 $res['id'] = $id;
                 $res['msg'] = 'Salvo!';
+                $c = new Clientes();
+                $nomecliente = $c->selecionarId($dados['cliente_id'])[0]['nome'];
+                $n->inserir([
+                    "mensagem"=> "nova solicitação de ".$nomecliente,
+                    "user"=> $dados['tecnico_id'],
+                    "agendamento_id" => $agendamento]);
             }
 
         }

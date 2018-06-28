@@ -39,6 +39,17 @@ class Notificacoes extends Model {
         }
 
         return $final;
+    }
+
+    public function inserir($dados){
+
+        $c = new CRUD();
+
+        $valores = "'{$dados['mensagem']}', '{$dados['agendamento_id']}', '{$_SESSION['id']}', '{$dados['user']}'";
+
+        $id = $c->Salvar('notificacoes', 'mensagem, agendamento_id, usuario_id, user_id', $valores);
+
+        return $id;
 
     }
 }
