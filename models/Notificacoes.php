@@ -24,7 +24,7 @@ class Notificacoes extends Model {
             $condicao = "";
         }
 
-        $res = $c->Query($sql.$condicao." ORDER BY agendamento.agendamento");
+        $res = $c->Query($sql.$condicao." ORDER BY agendamento.id");
 
         $final = [];
 
@@ -72,6 +72,10 @@ FROM
             $condicao = " where n.id > {$id} ";
         }else{
             $condicao = "";
+        }
+
+        if($_SESSION['tipo_id'] == 5){
+            $condicao .= " and n.user_id = {$_SESSION['id']} ";
         }
 
         $res = $c->Query($sql.$condicao." ORDER BY n.id");

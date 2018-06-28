@@ -5,14 +5,15 @@ $(function () {
 
     var _construct = function () {
         logout();
-        notificacoes();
         removericon();
         setInterval(function () {
             notificacoes();
-        }, 5000);
-        setInterval(function () {
-            notificar();
-        }, 10000);
+        }, 20000);
+        if (tipo_id == 1 || tipo_id == 3 || tipo_id == 5) {
+            setInterval(function () {
+                notificar();
+            }, 10000);
+        }
     };
 
 
@@ -51,10 +52,10 @@ $(function () {
             dataType: 'json',
             async: true,
             success: function (retorno) {
-                console.log(retorno);
                 if (retorno.length > 0) {
                     $("#circulo_notificacoes").show();
-                    id_notificacao = retorno[retorno.length - 1]['id_agendamento'];
+                    var ultimo = retorno.length - 1;
+                    id_notificacao = retorno[ultimo]['agendamento_id'];
                     $.each(retorno, function (i, v) {
                         preencherhtmlNotificacao(v);
                     });
@@ -78,7 +79,7 @@ $(function () {
                 console.log(retorno);
                 if (retorno.length > 0) {
                     $("#circulo_notificacoes").show();
-                    id_notificacoes = retorno[retorno.length - 1]['id_agendamento'];
+                    id_notificacoes = retorno[retorno.length - 1]['id'];
                     $.each(retorno, function (i, v) {
                         preencherhtmlNotificacao2(v);
                     });
@@ -89,7 +90,15 @@ $(function () {
 
     var preencherhtmlNotificacao = function (v) {
 
-        var html = '<a class="dropdown-item" href="' + BASE_URL + 'solicitacaoview?id=' + v['id_solicitacao'] + '" target="_blank">' +
+        var view = "";
+
+        if (tipo_id < 5) {
+            view = "solicitacao";
+        } else {
+            view = "solicitacaoview";
+        }
+
+        var html = '<a class="dropdown-item" href="' + BASE_URL + view + '?id=' + v['id_solicitacao'] + '" target="_blank">' +
             '           <span class="text-warning">' +
             '                <strong>Solicitação de ' + v['nome'] + ' atrasa hoje</strong>' +
             '           </span>' +
@@ -104,7 +113,15 @@ $(function () {
 
     var preencherhtmlNotificacao2 = function (v) {
 
-        var html = '<a class="dropdown-item" href="' + BASE_URL + 'solicitacaoview?id=' + v['id_solicitacao'] + '" target="_blank">' +
+        var view = "";
+
+        if (tipo_id < 5) {
+            view = "solicitacao";
+        } else {
+            view = "solicitacaoview";
+        }
+
+        var html = '<a class="dropdown-item" href="' + BASE_URL + view + '?id=' + v['id_solicitacao'] + '" target="_blank">' +
             '           <span class="text-info">' +
             '                <strong>' + v['mensagem'] + '</strong>' +
             '           </span>' +
@@ -121,7 +138,7 @@ $(function () {
         $("#notificacoes").append(html);
     };
 
-    var limparHtml = function(){
+    var limparHtml = function () {
         $("#notificacoes").html("");
     };
 
