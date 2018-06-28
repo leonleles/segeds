@@ -11,7 +11,7 @@ $(function () {
             notificacoes();
         }, 5000);
         setInterval(function () {
-            notificacoes();
+            notificar();
         }, 10000);
     };
 

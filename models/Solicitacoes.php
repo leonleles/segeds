@@ -145,7 +145,7 @@ class Solicitacoes extends Model {
             $condicao = "WHERE (( previsao > '{$dados['agendamento']}' AND previsao < '{$dados['previsao']}' ) or
 	        ( agendamento < '{$dados['previsao']}' AND agendamento > '{$dados['agendamento']}' )) and tecnico_id = {$dados['tecnico_id']}";
         }
-        $res = $c->Selecionar('*', 'agendamento', $condicao);
+        $res = $c->Selecionar('*', 'agendamento', $condicao." and status != 1");
 
         return count($res);
 

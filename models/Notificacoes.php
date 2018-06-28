@@ -16,7 +16,7 @@ class Notificacoes extends Model {
 	            LEFT JOIN solicitacao s ON s.agendamento_id = agendamento.id
 	            LEFT JOIN cliente c ON s.cliente_id = c.id 
                 WHERE
-	            agendamento.tecnico_id = {$_SESSION['id']} ";
+	            agendamento.tecnico_id = {$_SESSION['id']}  and agendamento.status = 2";
 
         if($id != null){
             $condicao = " and agendamento.id > {$id} ";
@@ -38,7 +38,7 @@ class Notificacoes extends Model {
             }
         }
 
-        return $final;
+        return $res;
     }
 
     public function inserir($dados){
